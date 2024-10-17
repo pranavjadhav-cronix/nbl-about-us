@@ -1,0 +1,344 @@
+{{ 'component-complete-the-look.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .prods {
+    a {
+      color: var(--color-link);
+      text-decoration: none;
+    }
+  }
+  .complete-the-look-main-heading {
+    border-color: var(--color-link);
+  }
+
+  .prods-bottom {
+    border-color: var(--color-link);
+  }
+{%- endstyle -%}
+
+<div class='complete-the-look-section'>
+  {%- if section.settings.image != blank or section.settings.mobile_image != blank -%}
+    {% if section.settings.image != blank %}
+      <img
+        srcset='
+          {%- if section.settings.image.width >= 375 -%}{{ section.settings.image | image_url: width: 375 }} 375w,{%- endif -%}
+          {%- if section.settings.image.width >= 750 -%}{{ section.settings.image | image_url: width: 750 }} 750w,{%- endif -%}
+          {%- if section.settings.image.width >= 1100 -%}{{ section.settings.image | image_url: width: 1100 }} 1100w,{%- endif -%}
+          {%- if section.settings.image.width >= 1500 -%}{{ section.settings.image | image_url: width: 1500 }} 1500w,{%- endif -%}
+          {%- if section.settings.image.width >= 1780 -%}{{ section.settings.image | image_url: width: 1780 }} 1780w,{%- endif -%}
+          {%- if section.settings.image.width >= 2000 -%}{{ section.settings.image | image_url: width: 2000 }} 2000w,{%- endif -%}
+          {%- if section.settings.image.width >= 3000 -%}{{ section.settings.image | image_url: width: 3000 }} 3000w,{%- endif -%}
+          {%- if section.settings.image.width >= 3840 -%}{{ section.settings.image | image_url: width: 3840 }} 3840w,{%- endif -%}
+          {{ section.settings.image | image_url }} {{ section.settings.image.width }}w
+        '
+        sizes='100vw'
+        src='{{ section.settings.image | image_url: width: 1500 }}'
+        loading='lazy'
+        alt='{{ section.settings.image.alt | escape }}'
+        width='{{ section.settings.image.width }}'
+        height='{{ section.settings.image.width | divided_by: section.settings.image.aspect_ratio }}'
+        class='mobile-hide complete-the-look-box-image'
+      >
+    {% endif %}
+    {% if section.settings.mobile_image != blank %}
+      <img
+        srcset='
+          {%- if section.settings.mobile_image.width >= 375 -%}{{ section.settings.mobile_image | image_url: width: 375 }} 375w,{%- endif -%}
+          {%- if section.settings.mobile_image.width >= 750 -%}{{ section.settings.mobile_image | image_url: width: 750 }} 750w,{%- endif -%}
+          {%- if section.settings.mobile_image.width >= 1100 -%}{{ section.settings.mobile_image | image_url: width: 1100 }} 1100w,{%- endif -%}
+          {%- if section.settings.mobile_image.width >= 1500 -%}{{ section.settings.mobile_image | image_url: width: 1500 }} 1500w,{%- endif -%}
+          {%- if section.settings.mobile_image.width >= 1780 -%}{{ section.settings.mobile_image | image_url: width: 1780 }} 1780w,{%- endif -%}
+          {%- if section.settings.mobile_image.width >= 2000 -%}{{ section.settings.mobile_image | image_url: width: 2000 }} 2000w,{%- endif -%}
+          {%- if section.settings.mobile_image.width >= 3000 -%}{{ section.settings.mobile_image | image_url: width: 3000 }} 3000w,{%- endif -%}
+          {%- if section.settings.mobile_image.width >= 3840 -%}{{ section.settings.mobile_image | image_url: width: 3840 }} 3840w,{%- endif -%}
+          {{ section.settings.mobile_image | image_url }} {{ section.settings.mobile_image.width }}w
+        '
+        sizes='100vw'
+        src='{{ section.settings.mobile_image | image_url: width: 1500 }}'
+        loading='lazy'
+        alt='{{ section.settings.mobile_image.alt | escape }}'
+        width='{{ section.settings.mobile_image.width }}'
+        height='{{ section.settings.mobile_image.width | divided_by: section.settings.mobile_image.aspect_ratio }}'
+        class='desktop-hide complete-the-look-box-image'
+      >
+    {% else %}
+      <img
+        srcset='
+          {%- if section.settings.image.width >= 375 -%}{{ section.settings.image | image_url: width: 375 }} 375w,{%- endif -%}
+          {%- if section.settings.image.width >= 750 -%}{{ section.settings.image | image_url: width: 750 }} 750w,{%- endif -%}
+          {%- if section.settings.image.width >= 1100 -%}{{ section.settings.image | image_url: width: 1100 }} 1100w,{%- endif -%}
+          {%- if section.settings.image.width >= 1500 -%}{{ section.settings.image | image_url: width: 1500 }} 1500w,{%- endif -%}
+          {%- if section.settings.image.width >= 1780 -%}{{ section.settings.image | image_url: width: 1780 }} 1780w,{%- endif -%}
+          {%- if section.settings.image.width >= 2000 -%}{{ section.settings.image | image_url: width: 2000 }} 2000w,{%- endif -%}
+          {%- if section.settings.image.width >= 3000 -%}{{ section.settings.image | image_url: width: 3000 }} 3000w,{%- endif -%}
+          {%- if section.settings.image.width >= 3840 -%}{{ section.settings.image | image_url: width: 3840 }} 3840w,{%- endif -%}
+          {{ section.settings.image | image_url }} {{ section.settings.image.width }}w
+        '
+        sizes='100vw'
+        src='{{ section.settings.image | image_url: width: 1500 }}'
+        loading='lazy'
+        alt='{{ section.settings.image.alt | escape }}'
+        width='{{ section.settings.image.width }}'
+        height='{{ section.settings.image.width | divided_by: section.settings.image.aspect_ratio }}'
+        class='mobile-hide complete-the-look-box-image'
+      >
+    {% endif %}
+  {%- else -%}
+    {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+  {%- endif -%}
+
+  <div class='complete-the-look-prods-container page-width'>
+    <div class='complete-the-look-prods color-{{ section.settings.color_scheme }}'>
+      <h3 class='complete-the-look-subheading'>{{ section.settings.subheading }}</h3>
+      <h2 class='complete-the-look-main-heading'>{{ section.settings.main_heading }}</h2>
+
+      <div class='prods'>
+        {% for block in section.blocks %}
+          {% assign product = all_products[block.settings.product] %}
+
+          {% if forloop.index == 1 %}
+            <div class='prods-item {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}{% if forloop.length > 1 %} vertical-divider{% endif %}'>
+              <div class='prods-media'>
+                <a href='{{ product.url }}'>
+                  {%- if product.featured_media != blank -%}
+                    <img
+                      srcset='
+                        {%- if product.featured_media.width >= 165 -%}{{ product.featured_media | image_url: width: 165 }} 165w,{%- endif -%}
+                        {%- if product.featured_media.width >= 360 -%}{{ product.featured_media | image_url: width: 360 }} 360w,{%- endif -%}
+                        {%- if product.featured_media.width >= 533 -%}{{ product.featured_media | image_url: width: 533 }} 533w,{%- endif -%}
+                        {%- if product.featured_media.width >= 720 -%}{{ product.featured_media | image_url: width: 720 }} 720w,{%- endif -%}
+                        {%- if product.featured_media.width >= 940 -%}{{ product.featured_media | image_url: width: 940 }} 940w,{%- endif -%}
+                        {%- if product.featured_media.width >= 1066 -%}{{ product.featured_media | image_url: width: 1066 }} 1066w,{%- endif -%}
+                        {{ product.featured_media | image_url }} {{ product.featured_media.width }}w
+                      '
+                      src='{{ product.featured_media | image_url: width: 90 }}'
+                      sizes='(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)'
+                      alt='{{ product.featured_media.alt | escape }}'
+                      class='motion-reduce prods-item-image'
+                      loading='lazy'
+                      width='{{ product.featured_media.width }}'
+                      height='{{ product.featured_media.height }}'
+                    >
+                  {%- else -%}
+                    {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                </a>
+              </div>
+
+              <div class='prods-top'>
+                {% if product.title != blank %}
+                  <h3 class='prods-top__title'>
+                    <a href='{{ product.url }}'>{{ product.title | capitalize }}</a>
+                  </h3>
+                {% else %}
+                  <h3 class='prods-top__title'><a href='/'>Product Title</a></h3>
+                {% endif %}
+
+                {% assign prod_variant_count = 0 %}
+
+                {% if product.available and product.variants.size > 1 %}
+                  {% for option in product.options %}
+                    {% if option contains 'Color' %}
+                      {% for variant in product.variants %}
+                        {% assign prod_variant_count = prod_variant_count | plus: 1 %}
+                      {% endfor %}
+                    {% else %}
+                      {% break %}
+                    {% endif %}
+                  {% endfor %}
+                {% endif %}
+
+                {% if prod_variant_count > 0 %}
+                  <span class='prods-top__variants'>
+                    {{- prod_variant_count }}
+                    {{ 'products.product.colors' | t -}}
+                  </span>
+                {% endif %}
+              </div>
+
+              <div class='prods-bottom'>
+                <p class='prods-bottom__collection-text'>
+                  {{ product.category.name }}
+                </p>
+
+                <p class='prods-bottom__price-text'>
+                  {% if product.price != blank %}
+                    <span class='prods-bottom__price'>{{ product.price | money_without_trailing_zeros }}</span>
+                    {% if product.compare_at_price %}
+                      <span class='prods-bottom__prev-price'>
+                        {{- product.compare_at_price | money_without_trailing_zeros -}}
+                      </span>
+                    {% endif %}
+                  {% else %}
+                    {{ 'products.product.price.unit_price' | money_without_trailing_zeros }}
+                  {% endif %}
+                </p>
+              </div>
+            </div>
+            {% # END .prods-item %}
+
+          {% else %}
+            <div class='prods-item {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}'>
+              <div class='prods-wrapper'>
+                <div class='prods-media'>
+                  <a href='{{ product.url }}'>
+                    {%- if product.featured_media != blank -%}
+                      <img
+                        srcset='
+                          {%- if product.featured_media.width >= 165 -%}{{ product.featured_media | image_url: width: 165 }} 165w,{%- endif -%}
+                          {%- if product.featured_media.width >= 360 -%}{{ product.featured_media | image_url: width: 360 }} 360w,{%- endif -%}
+                          {%- if product.featured_media.width >= 533 -%}{{ product.featured_media | image_url: width: 533 }} 533w,{%- endif -%}
+                          {%- if product.featured_media.width >= 720 -%}{{ product.featured_media | image_url: width: 720 }} 720w,{%- endif -%}
+                          {%- if product.featured_media.width >= 940 -%}{{ product.featured_media | image_url: width: 940 }} 940w,{%- endif -%}
+                          {%- if product.featured_media.width >= 1066 -%}{{ product.featured_media | image_url: width: 1066 }} 1066w,{%- endif -%}
+                          {{ product.featured_media | image_url }} {{ product.featured_media.width }}w
+                        '
+                        src='{{ product.featured_media | image_url: width: 90 }}'
+                        sizes='(min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 130 | divided_by: 4 }}px, (min-width: 990px) calc((100vw - 130px) / 4), (min-width: 750px) calc((100vw - 120px) / 3), calc((100vw - 35px) / 2)'
+                        alt='{{ product.featured_media.alt | escape }}'
+                        class='motion-reduce prods-item-image'
+                        loading='lazy'
+                        width='{{ product.featured_media.width }}'
+                        height='{{ product.featured_media.height }}'
+                      >
+                    {%- else -%}
+                      {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                    {%- endif -%}
+                  </a>
+                </div>
+
+                <div class='prods-top'>
+                  {% if product.title != blank %}
+                    <h3 class='prods-top__title'>
+                      <a href='{{ product.url }}'>{{ product.title | capitalize }}</a>
+                    </h3>
+                  {% else %}
+                    <h3 class='prods-top__title'>
+                      <a href='/'>{{ 'onboarding.product_title' | t }}</a>
+                    </h3>
+                  {% endif %}
+
+                  {% assign prod_variant_count = 0 %}
+
+                  {% if product.available and product.variants.size > 1 %}
+                    {% for option in product.options %}
+                      {% if option contains 'Color' %}
+                        {% for variant in product.variants %}
+                          {% assign prod_variant_count = prod_variant_count | plus: 1 %}
+                        {% endfor %}
+                      {% else %}
+                        {% break %}
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+
+                  {% if prod_variant_count > 0 %}
+                    <span class='prods-top__variants'>
+                      {{- prod_variant_count }}
+                      {{ 'products.product.colors' | t -}}
+                    </span>
+                  {% endif %}
+                </div>
+              </div>
+
+              <div class='prods-bottom'>
+                <p class='prods-bottom__collection-text'>
+                  {{ product.category.name }}
+                </p>
+
+                <p class='prods-bottom__price-text'>
+                  {% if product.price != blank %}
+                    <span class='prods-bottom__price'>{{ product.price | money_without_trailing_zeros }}</span>
+                    {% if product.compare_at_price %}
+                      <span class='prods-bottom__prev-price'>
+                        {{- product.compare_at_price | money_without_trailing_zeros -}}
+                      </span>
+                    {% endif %}
+                  {% else %}
+                    {{ 'products.product.price.unit_price' | money_without_trailing_zeros }}
+                  {% endif %}
+                </p>
+              </div>
+            </div>
+            {% # END .prods-item %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Complete The Look",
+  "tag": "section",
+  "class": "section-complete-the-look",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "max_blocks": 3,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "Tablet/Mobile image"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Shop the look"
+    },
+    {
+      "type": "text",
+      "id": "main_heading",
+      "label": "Main Heading",
+      "default": "Everything you need, sunup to sundown."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.multirow.settings.container_color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.animation.content"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "t:sections.collage.blocks.product.name",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "t:sections.collage.blocks.product.settings.product.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Complete The Look Module",
+      "blocks": [
+        {
+          "type": "product"
+        },
+        {
+          "type": "product"
+        },
+        {
+          "type": "product"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

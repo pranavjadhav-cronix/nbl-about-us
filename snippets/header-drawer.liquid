@@ -1,0 +1,600 @@
+{% comment %}
+  Renders a header drawer menu for mobile and desktop.
+
+  Usage:
+  {% render 'header-drawer' %}
+{% endcomment %}
+
+<header-drawer data-breakpoint='{% if section.settings.menu_type_desktop == 'drawer' %}desktop{% else %}tablet{% endif %}'>
+  <details id='Details-menu-drawer-container' class='menu-drawer-container'>
+    <summary
+      class='header__icon header__icon--menu header__icon--summary link focus-inset'
+      aria-label='{{ 'sections.header.menu' | t }}'
+    >
+      <span>
+        {% render 'icon-hamburger' %}
+        {% render 'icon-close' %}
+      </span>
+    </summary>
+    <div id='menu-drawer' class='gradient menu-drawer motion-reduce color-{{ section.settings.menu_color_scheme }}'>
+      <div class='menu-drawer__inner-container'>
+        <div class='menu-drawer__navigation-container'>
+          <div class='menu-drawer-header'>
+            <div class='menu-drawer-logo'>
+              <a
+                href='{{ routes.root_url }}'
+                class='header__heading-link link link--text focus-inset'
+                aria-label='{{ shop.name }}'
+              >
+                {%- if settings.logo != blank -%}
+                  <div class='header__heading-logo-wrapper'>
+                    {%- assign logo_alt = settings.logo.alt | default: shop.name | escape -%}
+                    {%- assign logo_height = settings.logo_width | divided_by: settings.logo.aspect_ratio -%}
+                    {% capture sizes %}(max-width: {{ settings.logo_width | times: 2 }}px) 50vw, {{ settings.logo_width }}px{% endcapture %}
+                    {% capture widths %}{{ settings.logo_width }}, {{ settings.logo_width | times: 1.5 | round }}, {{ settings.logo_width | times: 2 }}{% endcapture %}
+                    {{
+                      settings.logo
+                      | image_url: width: 600
+                      | image_tag:
+                        class: 'header__heading-logo motion-reduce',
+                        widths: widths,
+                        height: logo_height,
+                        width: settings.logo_width,
+                        alt: logo_alt,
+                        sizes: sizes,
+                        preload: true
+                    }}
+                  </div>
+                {%- else -%}
+                  <span class='h2' aria-label='{{ shop.name }}'>{{ shop.name }}</span>
+                {%- endif -%}
+              </a>
+            </div>
+            <div class='menu-drawer-close'>
+              <button class='drawer-close-button' aria-label='close'>
+                {% render 'icon-close' %}
+              </button>
+            </div>
+          </div>
+          <nav class='menu-drawer__navigation'>
+            <ul class='menu-drawer__menu has-submenu list-menu' role='list'>
+              {%- for link in section.settings.menu.links -%}
+                <li>
+                  {%- if link.links != blank -%}
+                    <details id='Details-menu-drawer-menu-item-{{ forloop.index }}'>
+                      <summary
+                        id='HeaderDrawer-{{ link.handle }}'
+                        class='menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.child_active %} menu-drawer__menu-item--active{% endif %}'
+                        aria-label='{{ link.title | escape }}'
+                      >
+                        {{ link.title | escape }}
+                        {% render 'icon-arrow' %}
+                        {% render 'icon-caret' %}
+                      </summary>
+                      <div
+                        id='link-{{ link.handle | escape }}'
+                        class='menu-drawer__submenu has-submenu gradient motion-reduce'
+                        tabindex='-1'
+                      >
+                        <div class='menu-drawer__inner-submenu'>
+                          <div class='menu-drawer-header'>
+                            <button
+                              class='menu-drawer__close-button link link--text focus-inset'
+                              aria-expanded='true'
+                              aria-label='Go back to previous menu'
+                              aria-controls='menu-drawer'
+                            >
+                              {% render 'icon-arrow' %}
+                            </button>
+                            <span class='previous-menu-title'>{{ link.title | escape }}</span>
+                            <div class='menu-drawer-close'>
+                              <button
+                                class='drawer-close-button'
+                                aria-label='Close menu drawer'
+                                aria-controls='menu-drawer'
+                              >
+                                {% render 'icon-close' %}
+                              </button>
+                            </div>
+                          </div>
+                          <ul class='menu-drawer__menu list-menu' role='list' tabindex='-1'>
+                            {%- for childlink in link.links -%}
+                              <li>
+                                {%- if childlink.links == blank -%}
+                                  <a
+                                    id='HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}'
+                                    href='{{ childlink.url }}'
+                                    class='menu-drawer__menu-item link link--text list-menu__item focus-inset{% if childlink.current %} menu-drawer__menu-item--active{% endif %}'
+                                    {% if childlink.current %}
+                                      aria-current='page'
+                                    {% endif %}
+                                    aria-label='{{ childlink.title | escape }}'
+                                  >
+                                    {{ childlink.title | escape }}
+                                  </a>
+                                {%- else -%}
+                                  <details id='Details-menu-drawer-{{ link.handle }}-{{ childlink.handle }}'>
+                                    <summary
+                                      id='HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}'
+                                      aria-label='{{ childlink.title | escape }}'
+                                      class='menu-drawer__menu-item link link--text list-menu__item focus-inset'
+                                    >
+                                      {{ childlink.title | escape }}
+                                      {% render 'icon-arrow' %}
+                                      {% render 'icon-caret' %}
+                                    </summary>
+                                    <div
+                                      id='childlink-{{ childlink.handle | escape }}'
+                                      class='menu-drawer__submenu has-submenu gradient motion-reduce'
+                                    >
+                                      <div class='menu-drawer-header'>
+                                        <button
+                                          class='menu-drawer__close-button link link--text focus-inset'
+                                          aria-expanded='true'
+                                          aria-label='Go back to previous menu'
+                                          aria-controls='menu-drawer'
+                                        >
+                                          {% render 'icon-arrow' %}
+                                        </button>
+                                        <span class='previous-menu-title'>{{ childlink.title | escape }}</span>
+                                        <div class='menu-drawer-close'>
+                                          <button
+                                            class='drawer-close-button'
+                                            aria-label='Close menu drawer'
+                                            aria-controls='menu-drawer'
+                                          >
+                                            {% render 'icon-close' %}
+                                          </button>
+                                        </div>
+                                      </div>
+
+                                      <ul
+                                        class='menu-drawer__menu list-menu'
+                                        role='list'
+                                        tabindex='-1'
+                                      >
+                                        {%- for grandchildlink in childlink.links -%}
+                                          <li>
+                                            <a
+                                              id='HeaderDrawer-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}'
+                                              href='{{ grandchildlink.url }}'
+                                              class='menu-drawer__menu-item link link--text list-menu__item focus-inset{% if grandchildlink.current %} menu-drawer__menu-item--active{% endif %}'
+                                              {% if grandchildlink.current %}
+                                                aria-current='page'
+                                              {% endif %}
+                                              aria-label='{{ grandchildlink.title | escape }}'
+                                            >
+                                              {{ grandchildlink.title | escape }}
+                                            </a>
+                                          </li>
+                                        {%- endfor -%}
+                                      </ul>
+                                      {% for block in section.blocks %}
+                                        {% case block.type %}
+                                          {% when 'parent_megamenu' %}
+                                            {% assign parent_megamenu = block.settings.parent_megamenu_title %}
+                                            {% if parent_megamenu != blank and parent_megamenu == childlink.title %}
+                                              <div class='menu-megamenu-main'>
+                                                {% if block.settings.image != blank %}
+                                                  <div class='megamenu-image'>
+                                                    {% if block.settings.megamenu_link != blank %}
+                                                      <a
+                                                        href='{{ block.settings.megamenu_link }}'
+                                                        aria-label='More details'
+                                                        role='link'
+                                                      >
+                                                    {% endif %}
+                                                    <img
+                                                      src='{{ block.settings.image | image_url: width: '550' }}'
+                                                      alt='{{ block.settings.image.alt | escape }}'
+                                                      loading='lazy'
+                                                      height='550'
+                                                      width='550'
+                                                      class='megamenu-image-left'
+                                                    >
+                                                    {% if block.settings.megamenu_link != blank %}
+                                                      </a>
+                                                    {% endif %}
+                                                  </div>
+                                                {% endif %}
+
+                                                {% if block.settings.megamenu_link != blank
+                                                  or block.settings.heading != blank
+                                                  or block.settings.text != blank
+                                                %}
+                                                  <div class='megamenu-content'>
+                                                    {% if block.settings.heading != blank
+                                                      or block.settings.text != blank
+                                                    %}
+                                                      <div class='left-content'>
+                                                        {% if block.settings.heading != blank %}
+                                                          <h2 class='heading'>{{ block.settings.heading }}</h2>
+                                                        {% endif %}
+                                                        {% if block.settings.text != blank %}
+                                                          <p class='text'>{{ block.settings.text }}</p>
+                                                        {% endif %}
+                                                      </div>
+                                                    {% endif %}
+
+                                                    {% if block.settings.megamenu_link != blank %}
+                                                      <a
+                                                        href='{{ block.settings.megamenu_link }}'
+                                                        class='right-link'
+                                                        aria-label='More details'
+                                                        role='link'
+                                                      >
+                                                        {% render 'icon-nav-link-arrow' %}
+                                                      </a>
+                                                    {% endif %}
+                                                  </div>
+                                                {% endif %}
+                                              </div>
+                                            {% endif %}
+                                        {% endcase %}
+                                      {% endfor %}
+                                    </div>
+                                  </details>
+                                {%- endif -%}
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                          {% for block in section.blocks %}
+                            {% case block.type %}
+                              {% when 'main_megamenu' %}
+                                {% assign main_megamenu = block.settings.main_megamenu_title %}
+                                {% if main_megamenu != blank and main_megamenu == link.title %}
+                                  <div class='menu-megamenu-main ex-large-up-hide'>
+                                    {% if block.settings.image != blank %}
+                                      <div class='megamenu-image'>
+                                        {% if block.settings.megamenu_link != blank %}
+                                          <a
+                                            href='{{ block.settings.megamenu_link }}'
+                                            aria-label='More details'
+                                            role='link'
+                                          >
+                                        {% endif %}
+                                        <img
+                                          src='{{ block.settings.image | image_url: width: '550' }}'
+                                          alt='{{ block.settings.image.alt | escape }}'
+                                          loading='lazy'
+                                          height='550'
+                                          width='550'
+                                          class='megamenu-image-left'
+                                        >
+                                        {% if block.settings.megamenu_link != blank %}
+                                          </a>
+                                        {% endif %}
+                                      </div>
+                                    {% endif %}
+
+                                    {% if block.settings.megamenu_link != blank
+                                      or block.settings.heading != blank
+                                      or block.settings.text != blank
+                                    %}
+                                      <div class='megamenu-content'>
+                                        {% if block.settings.heading != blank or block.settings.text != blank %}
+                                          <div class='left-content'>
+                                            {% if block.settings.heading != blank %}
+                                              <h2 class='heading'>{{ block.settings.heading }}</h2>
+                                            {% endif %}
+                                            {% if block.settings.text != blank %}
+                                              <p class='text'>{{ block.settings.text }}</p>
+                                            {% endif %}
+                                          </div>
+                                        {% endif %}
+
+                                        {% if block.settings.megamenu_link != blank %}
+                                          <a
+                                            href='{{ block.settings.megamenu_link }}'
+                                            class='right-link'
+                                            aria-label='More details'
+                                            role='link'
+                                          >
+                                            {% render 'icon-nav-link-arrow' %}
+                                          </a>
+                                        {% endif %}
+                                      </div>
+                                    {% endif %}
+                                  </div>
+                                {% endif %}
+                            {% endcase %}
+                          {% endfor %}
+                        </div>
+                      </div>
+                    </details>
+                  {%- else -%}
+                    {% assign blankMainMenu = false %}
+                    {% for block in section.blocks %}
+                      {% case block.type %}
+                        {% when 'main_megamenu' %}
+                          {% assign main_megamenu = block.settings.main_megamenu_title %}
+                          {% if main_megamenu != blank and main_megamenu == link.title %}
+                            {% assign blankMainMenu = true %}
+                            {% capture menuImageContent %} 
+                              <details id="Details-menu-drawer-menu-item-1">
+                                <summary id="HeaderDrawer-{{ link.handle }}" class="menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.active %} menu-drawer__menu-item--active{% endif %}" aria-label="{{ link.title | escape }}">
+                                  {{ link.title | escape }}
+                                  {% render 'icon-arrow' %}
+                                  {% render 'icon-caret' %}
+                                </summary>
+                                <div id="link-{{ link.title | escape }}" class="menu-drawer__submenu has-submenu gradient motion-reduce" tabindex="-1">
+                                  <div class="menu-drawer__inner-submenu not-navigation">
+                                    <div class="menu-drawer-header">
+                                      <button class="menu-drawer__close-button link link--text focus-inset" aria-expanded="true" aria-label="Go back to previous menu" aria-controls="menu-drawer">
+                                        {% render 'icon-arrow' %}
+                                      </button>
+                                      <span class="previous-menu-title">{{ link.title | escape }}</span>
+                                      <div class="menu-drawer-close">
+                                        <button class="drawer-close-button" aria-label="Close menu drawer" aria-controls="menu-drawer">
+                                          {% render 'icon-close' %}
+                                        </button>
+                                      </div>
+                                    </div>
+                                    <div class="menu-megamenu-main">
+                                      {% if block.settings.image != blank %}
+                                        <div class="megamenu-image">
+                                          {% if block.settings.megamenu_link != blank %}
+                                          <a 
+                                              href="{{ block.settings.megamenu_link }}" 
+                                              aria-label="More details" 
+                                              role="link" 
+                                          >
+                                          {% endif %}
+                                          <img 
+                                            src="{{ block.settings.image | image_url: width: '550' }}" 
+                                            alt="{{ block.settings.image.alt | escape }}" 
+                                            loading="lazy"
+                                            height="550"
+                                            width="550"
+                                            class="megamenu-image-left"
+                                          />
+                                          {% if block.settings.megamenu_link != blank %}
+                                          </a>
+                                           {% endif %}
+                                        </div>
+                                      {% endif %}
+
+                                      {% if block.settings.megamenu_link != blank or block.settings.heading != blank or block.settings.text != blank %}
+                                        <div class="megamenu-content">
+                                          {% if block.settings.heading != blank or block.settings.text != blank %}
+                                            <div class="left-content">
+                                              {% if block.settings.heading != blank %}
+                                                <h2 class="heading">{{ block.settings.heading }}</h2> 
+                                              {% endif %}
+                                              {% if block.settings.text != blank %}
+                                                <p class="text">{{ block.settings.text }}</p>
+                                              {% endif %}
+                                            </div>
+                                          {% endif %}
+
+                                          {% if block.settings.megamenu_link != blank %}
+                                            <a 
+                                              href="{{ block.settings.megamenu_link }}" 
+                                              class="right-link"
+                                              aria-label="More details" 
+                                              role="link" 
+                                            >
+                                              {% render 'icon-link-cross-arrow' %}
+                                            </a>
+                                          {% endif %}
+                                        </div>
+                                      {% endif %}
+                                    </div>
+                                  </div>
+                                </div>
+                              </details>
+                            {% endcapture %}
+                          {% endif %}
+                      {% endcase %}
+                    {% endfor %}
+                    {% if blankMainMenu %}
+                      {{ menuImageContent }}
+                    {% else %}
+                      <a
+                        id='HeaderDrawer-{{ link.handle }}'
+                        href='{{ link.url }}'
+                        class='menu-drawer__menu-item list-menu__item link link--text focus-inset{% if link.current %} menu-drawer__menu-item--active{% endif %}'
+                        {% if link.current %}
+                          aria-current='page'
+                        {% endif %}
+                        aria-label='{{ link.title | escape }}'
+                      >
+                        {{ link.title | escape }}
+                      </a>
+                    {% endif %}
+                  {%- endif -%}
+                </li>
+              {%- endfor -%}
+            </ul>
+          </nav>
+          <ul class='menu-drawer__utility-links dropdown-menu-bottom'>
+            {%- if shop.customer_accounts_enabled -%}
+              <li>
+                <a
+                  href='{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}'
+                  class='menu-drawer-account list-menu__item link focus-inset large-up-hide'
+                  aria-label='{% if customer -%}{{ 'customer.account_fallback' | t }}{% else -%}{{ 'customer.log_in' | t }}{% endif -%}'
+                  aria-current='{% if customer -%}page{% else -%}false{% endif -%}'
+                >
+                  {%- if section.settings.enable_customer_avatar -%}
+                    <account-icon>
+                      {%- if customer and customer.has_avatar? -%}
+                        {{ customer | avatar }}
+                      {%- else -%}
+                        {% render 'icon-account' %}
+                      {%- endif -%}
+                    </account-icon>
+                  {%- else -%}
+                    {% render 'icon-account' %}
+                  {%- endif -%}
+                  {%- liquid
+                    if customer
+                      echo 'customer.account_fallback' | t
+                    else
+                      echo 'customer.log_in' | t
+                    endif
+                  -%}
+                </a>
+              </li>
+            {%- endif -%}
+
+            {% if section.settings.bottom_menu != blank %}
+              {% for bottom_menu_item in section.settings.bottom_menu.links %}
+                <li>
+                  <a
+                    href='{{ bottom_menu_item.url }}'
+                    class='text tracking-custom link link--text list-menu__item'
+                    aria-label='{{ bottom_menu_item.title | escape }}'
+                    {% if bottom_menu_item.current %}
+                      aria-current='page'
+                    {% endif %}
+                  >
+                    {{ bottom_menu_item.title | escape }}
+                  </a>
+                </li>
+              {% endfor %}
+            {% endif %}
+
+            {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+              <div class='localization-wrapper'>
+                <button
+                  class='country-model-button'
+                  aria-label='currency-{{ localization.country.iso_code | downcase }}'
+                  aria-haspopup='dialog'
+                  aria-expanded='false'
+                  aria-controls='countrySelectorModal'
+                >
+                  {% render 'icon-world-custom' %}
+                  {{ localization.country.currency.iso_code }}
+                  <span class='visually-hidden'>Open country selector</span>
+                </button>
+              </div>
+            {% endif %}
+
+            <ul class='list list-social list-unstyled' role='list'>
+              {%- if settings.social_twitter_link != blank -%}
+                <li class='list-social__item'>
+                  <a href='{{ settings.social_twitter_link }}' class='list-social__link link'>
+                    {%- render 'icon-twitter' -%}
+                    <span class='visually-hidden'>{{ 'general.social.links.twitter' | t }}</span>
+                  </a>
+                </li>
+              {%- endif -%}
+              {%- if settings.social_facebook_link != blank -%}
+                <li class='list-social__item'>
+                  <a href='{{ settings.social_facebook_link }}' class='list-social__link link'>
+                    {%- render 'icon-facebook' -%}
+                    <span class='visually-hidden'>{{ 'general.social.links.facebook' | t }}</span>
+                  </a>
+                </li>
+              {%- endif -%}
+              {%- if settings.social_pinterest_link != blank -%}
+                <li class='list-social__item'>
+                  <a href='{{ settings.social_pinterest_link }}' class='list-social__link link'>
+                    {%- render 'icon-pinterest' -%}
+                    <span class='visually-hidden'>{{ 'general.social.links.pinterest' | t }}</span>
+                  </a>
+                </li>
+              {%- endif -%}
+              {%- if settings.social_instagram_link != blank -%}
+                <li class='list-social__item'>
+                  <a href='{{ settings.social_instagram_link }}' class='list-social__link link'>
+                    {%- render 'icon-instagram' -%}
+                    <span class='visually-hidden'>{{ 'general.social.links.instagram' | t }}</span>
+                  </a>
+                </li>
+              {%- endif -%}
+              {%- if settings.social_tiktok_link != blank -%}
+                <li class='list-social__item'>
+                  <a href='{{ settings.social_tiktok_link }}' class='list-social__link link'>
+                    {%- render 'icon-tiktok' -%}
+                    <span class='visually-hidden'>{{ 'general.social.links.tiktok' | t }}</span>
+                  </a>
+                </li>
+              {%- endif -%}
+              {%- if settings.social_tumblr_link != blank -%}
+                <li class='list-social__item'>
+                  <a href='{{ settings.social_tumblr_link }}' class='list-social__link link'>
+                    {%- render 'icon-tumblr' -%}
+                    <span class='visually-hidden'>{{ 'general.social.links.tumblr' | t }}</span>
+                  </a>
+                </li>
+              {%- endif -%}
+              {%- if settings.social_snapchat_link != blank -%}
+                <li class='list-social__item'>
+                  <a href='{{ settings.social_snapchat_link }}' class='list-social__link link'>
+                    {%- render 'icon-snapchat' -%}
+                    <span class='visually-hidden'>{{ 'general.social.links.snapchat' | t }}</span>
+                  </a>
+                </li>
+              {%- endif -%}
+              {%- if settings.social_youtube_link != blank -%}
+                <li class='list-social__item'>
+                  <a href='{{ settings.social_youtube_link }}' class='list-social__link link'>
+                    {%- render 'icon-youtube' -%}
+                    <span class='visually-hidden'>{{ 'general.social.links.youtube' | t }}</span>
+                  </a>
+                </li>
+              {%- endif -%}
+              {%- if settings.social_vimeo_link != blank -%}
+                <li class='list-social__item'>
+                  <a href='{{ settings.social_vimeo_link }}' class='list-social__link link'>
+                    {%- render 'icon-vimeo' -%}
+                    <span class='visually-hidden'>{{ 'general.social.links.vimeo' | t }}</span>
+                  </a>
+                </li>
+              {%- endif -%}
+            </ul>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <div class='model-country-selector' role='dialog' aria-labelledby='countrySelectorTitle' id='countrySelectorModal'>
+    <div class='modal-content'>
+      <div class='modal-header'>
+        <button class='close' aria-label='Close modal'>
+          {% render 'icon-close-custom' %}
+        </button>
+      </div>
+      {% if settings.currency_heading != blank %}
+        <h2 id='countrySelectorTitle' class='country-selector-title'>{{ settings.currency_heading }}</h2>
+      {% endif %}
+      <form accept-charset='UTF-8' class='localization-form' enctype='multipart/form-data' aria-labelledby='country'>
+        <div class='country-select'>
+          <div class='select'>
+            {%- if settings.show_flag -%}
+              {%- for country in localization.available_countries -%}
+                <span class='country-selector-flag country-{{ country.iso_code | downcase }} {% unless country.iso_code == localization.country.iso_code %}hidden{% endunless %}'>
+                  {%- render 'icon-flag', flag: country.iso_code -%}
+                </span>
+              {%- endfor -%}
+            {%- endif -%}
+            <select name='country' id='countrySelector' class='country-selector' aria-required='true'>
+              {%- for country in localization.available_countries -%}
+                <option
+                  value='{{ country.iso_code }}'
+                  {% if localization.country.iso_code == country.iso_code %}
+                    selected
+                  {% endif %}
+                >
+                  {{ country.name }} ({{ country.currency.iso_code }})
+                </option>
+              {%- endfor -%}
+            </select>
+            {% render 'icon-down-caret' %}
+          </div>
+          {% if settings.currency_text != blank %}
+            <p class='text'>{{ settings.currency_text }}</p>
+          {% endif %}
+        </div>
+        {% if settings.button_text != blank %}
+          <button class='button button--primary' aria-label='{{ settings.button_text }}' type='submit'>
+            {{ settings.button_text }}
+          </button>
+        {% endif %}
+      </form>
+    </div>
+  </div>
+</header-drawer>

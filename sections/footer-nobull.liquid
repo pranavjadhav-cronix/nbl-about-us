@@ -1,0 +1,355 @@
+{{ 'section-footer.css' | asset_url | stylesheet_tag }}
+{{ 'component-list-menu.css' | asset_url | stylesheet_tag }}
+{{ 'component-list-payment.css' | asset_url | stylesheet_tag }}
+{{ 'component-list-social.css' | asset_url | stylesheet_tag }}
+<script src='{{ 'tab-navigation.js' | asset_url }}' defer='defer'></script>
+
+{%- liquid
+  assign has_social_icons = true
+  if settings.social_facebook_link == blank and settings.social_instagram_link == blank and settings.social_youtube_link == blank and settings.social_tiktok_link == blank and settings.social_twitter_link == blank and settings.social_pinterest_link == blank and settings.social_snapchat_link == blank and settings.social_tumblr_link == blank and settings.social_vimeo_link == blank
+    assign has_social_icons = false
+  endif
+
+  if localization.available_countries.size > 1 and section.settings.enable_country_selector or section.settings.enable_language_selector and localization.available_languages.size > 1
+    assign localization_forms = true
+  endif
+-%}
+
+{% if section.settings.show_top_line %}
+  <style>
+    .nobull-footer {
+      border-top: 1px solid var(--color-black-2);
+    }
+  </style>
+{% endif %}
+
+<footer id='Footer-Nobull-{{ section.id }}' class='nobull-footer color-{{ section.settings.color_scheme }}'>
+  <div class='nobull-footer-logo'>
+    {%- assign widths = '198, 432, 642, 900, 1284, 1800' -%}
+    {%- capture sizes -%}
+      (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 1.6667 }}px,
+      (min-width: 750px) calc((100vw - 130px) / 1.667), calc((100vw - 50px) / 1.667)
+    {%- endcapture -%}
+    {{ section.settings.logo | image_url: width: 1500 | image_tag: sizes: sizes, widths: widths }}
+  </div>
+
+  <div class='page-width'>
+    <div class='footer-top'>
+      {% for block in section.blocks %}
+        {% if block.type == 'navigation' %}
+          <div class='footer-column footer-column--nav'>
+            <h2>{{ block.settings.linklist.title }}</h2>
+            <ul class='list-unstyled'>
+              {% for link in block.settings.linklist.links %}
+                <li>
+                  <a href='{{ link.url }}' aria-label='{{ link.title }}'>{{ link.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+
+        {% elsif block.type == 'newsletter' %}
+          <div class='footer-column footer-column--news'>
+            <h2 class='font-secondary xs md-md'>{{ block.settings.heading_text }}</h2>
+            <p>{{ block.settings.body_text }}</p>
+
+            <div class='footer-column--news-btn-group'>
+              <button
+                class='button button--active button-email'
+              >
+                {{ 'newsletter.label' | t }}
+              </button>
+              <button
+                class='button button-sms'
+              >
+                {{ 'newsletter.sms' | t }}
+              </button>
+            </div>
+
+            <div>
+              {% form 'customer', id: 'footer-newsletter', novalidate: 'novalidate' %}
+                {% if form.posted_successfully? %}
+                  <p class='thankyou-message'>{{ 'newsletter.success' }}</p>
+                {% endif %}
+
+                <input
+                  type='hidden'
+                  name='contact[tags]'
+                  value='newsletter'
+                >
+                <input
+                  type='email'
+                  aria-required='true'
+                  id='section-{{ section.id }}-tabpanel-1'
+                  {% if form.errors %}
+                    autofocus
+                    aria-invalid='true'
+                    aria-describedby='ContactFooter-error'
+                  {% elsif form.posted_successfully? %}
+                    aria-describedby='ContactFooter-success'
+                  {% endif %}
+                  name='contact[email]'
+                  placeholder='Email address'
+                  {% if form.posted_successfully? %}
+                    style='display: none'
+                  {% endif %}
+                >
+                <input
+                  type='tel'
+                  id='phoneNumberForm-phone'
+                  class='hidden'
+                  autocomplete='tel'
+                  name='contact[{{ 'templates.contact.form.phone' | t }}]'
+                  pattern='[0-9\-]*'
+                  value=''
+                  {% if form.errors %}
+                    autofocus
+                    aria-invalid='true'
+                    aria-describedby='ContactFooter-error'
+                  {% elsif form.posted_successfully? %}
+                    aria-describedby='ContactFooter-success'
+                  {% endif %}
+                  {% if form.posted_successfully? %}
+                    style='display: none'
+                  {% endif %}
+                  placeholder='{{ 'templates.contact.form.phone' | t }}'
+                >
+                <button
+                  type='submit'
+                  aria-label='{{ 'newsletter.button_label' | t }}'
+                  class='footer-column--news-btn-icon'
+                  {% if form.posted_successfully? %}
+                    style='display: none'
+                  {% endif %}
+                >
+                  {{ 'icon-arrow-right-line.svg' | inline_asset_content }}
+                </button>
+
+                <div
+                  class='footer-column--news-agree-text'
+                  {% if form.posted_successfully? %}
+                    style='display: none'
+                  {% endif %}
+                >
+                  <p class='error-message'>
+                    <p class='error-message error-message-email hidden'>{{ 'newsletter.email_error' | t }}</p>
+                    <p class='error-message error-message-sms hidden'>{{ 'newsletter.sms_error' | t }}</p>
+                  </p>
+                  {{ block.settings.body_text_agree }}
+                </div>
+              {% endform %}
+            </div>
+          </div>
+
+        {% elsif block.type == 'text' %}
+          <div class='footer-column footer-column--text'>
+            <h2>{{ block.settings.heading_text }}</h2>
+            {{ block.settings.body_text }}
+          </div>
+        {% endif %}
+      {% endfor %}
+
+      {% if section.settings.show_social and has_social_icons %}
+        <div class='footer-social'>
+          {% render 'social-icons' %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class='footer-bottom{% if localization_forms %} header--has-localizations{% endif %}'>
+    <div class='page-width'>
+      {% if section.settings.nav_bottom != blank %}
+        <ul class='list-unstyled footer-bottom--nav'>
+          {% for link in section.settings.nav_bottom.links %}
+            {% if link.title == 'Accessibility' %}
+              <li class='icon-accessibility'>
+                <a href='{{ link.url }}'>
+                  {{- link.title | escape }}
+                  {{ 'icon-accessibility.svg' | inline_asset_content }}
+                </a>
+              </li>
+            {% else %}
+              <li>
+                <a href='{{ link.url }}'>{{ link.title | escape }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      <div class='footer-column footer-column--currency-copyright'>
+        {% if section.settings.enable_country_selector and localization.available_countries.size > 1 %}
+          <div class='localization-wrapper'>
+            <button
+              class='country-model-button country-model-button-footer'
+              aria-label='currency-{{ localization.country.iso_code | downcase }}'
+              aria-haspopup='dialog'
+              aria-expanded='false'
+              aria-controls='countrySelectorModal'
+            >
+              {{ 'icon-world-custom.svg' | inline_asset_content }}
+              {{ localization.country.currency.iso_code }}
+              <span class='visually-hidden'>Open country selector</span>
+            </button>
+            <div
+              class='model-country-selector'
+              role='dialog'
+              aria-labelledby='countrySelectorTitle'
+              id='countrySelectorModal'
+            >
+              <div class='modal-content'>
+                <div class='modal-header'>
+                  <button class='close' aria-label='Close modal'>
+                    {{ 'icon-close-custom.svg' | inline_asset_content }}
+                  </button>
+                </div>
+                {% if settings.currency_heading != blank %}
+                  <h2 id='countrySelectorTitle' class='country-selector-title'>{{ settings.currency_heading }}</h2>
+                {% endif %}
+                <form
+                  accept-charset='UTF-8'
+                  class='localization-form'
+                  enctype='multipart/form-data'
+                  aria-labelledby='country'
+                >
+                  <div class='country-select'>
+                    <div class='select'>
+                      {%- if settings.show_flag -%}
+                        <span class='country-selector-flag country-{{ localization.country.iso_code | downcase }}'>
+                          {%- render 'icon-flag', flag: localization.country.iso_code -%}
+                        </span>
+                      {%- endif -%}
+                      <select name='country' id='countrySelector' class='country-selector' aria-required='true'>
+                        {%- for country in localization.available_countries -%}
+                          <option
+                            value='{{ country.iso_code }}'
+                            {% if localization.country.iso_code == country.iso_code %}
+                              selected
+                            {% endif %}
+                          >
+                            {{ country.name }} ({{ country.currency.iso_code }})
+                          </option>
+                        {%- endfor -%}
+                      </select>
+                      {{ 'icon-down-caret.svg' | inline_asset_content }}
+                    </div>
+                    {% if settings.currency_text != blank %}
+                      <p class='text'>{{ settings.currency_text }}</p>
+                    {% endif %}
+                  </div>
+                  {% if settings.button_text != blank %}
+                    <button class='button button--primary' aria-label='{{ settings.button_text }}' type='submit'>
+                      {{ settings.button_text }}
+                    </button>
+                  {% endif %}
+                </form>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
+        {{ section.settings.copyright }}
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src='{{ 'footer.js' | asset_url }}' defer='defer'></script>
+
+{% schema %}
+{
+  "name": "Footer",
+  "tag": "section",
+  "class": "new-footer",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_top_line",
+      "label": "t:sections.footer.settings.show_top_line.label",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "t:sections.footer.settings.logo.label"
+    },
+    {
+      "type": "richtext",
+      "id": "copyright",
+      "label": "t:sections.footer.settings.copyright.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer.settings.header__2.content",
+      "info": "t:sections.footer.settings.header__2.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "default": true,
+      "label": "t:sections.footer.settings.show_social.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.header.settings.header__3.content",
+      "info": "t:sections.header.settings.header__4.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_country_selector",
+      "default": true,
+      "label": "t:sections.header.settings.enable_country_selector.label"
+    },
+    {
+      "type": "link_list",
+      "id": "nav_bottom",
+      "label": "t:sections.footer.settings.footer_bottom_menu.label"
+    }
+  ],
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "newsletter",
+      "name": "t:sections.footer.blocks.newsletter.name",
+      "settings": [
+        {
+          "id": "heading_text",
+          "type": "text",
+          "label": "t:sections.footer.blocks.newsletter.settings.heading.label",
+          "default": "Newsletter"
+        },
+        {
+          "id": "body_text",
+          "type": "text",
+          "label": "t:sections.footer.blocks.newsletter.settings.body.label",
+          "default": "t:sections.footer.blocks.newsletter.settings.body.default"
+        },
+        {
+          "id": "body_text_agree",
+          "type": "text",
+          "label": "t:sections.footer.blocks.newsletter.settings.form.label",
+          "default": "t:sections.footer.blocks.newsletter.settings.body.default"
+        }
+      ]
+    },
+    {
+      "name": "t:sections.footer.blocks.navigation.name",
+      "type": "navigation",
+      "settings": [
+        {
+          "type": "link_list",
+          "id": "linklist",
+          "label": "t:sections.footer.blocks.navigation.settings.navigation.label"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

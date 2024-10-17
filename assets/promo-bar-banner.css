@@ -1,0 +1,44 @@
+.promo-bar-banner {
+  max-height: 70px;
+  height: 100%;
+}
+
+.promo-banner-text-button {
+  display: flex;
+  align-items: center;
+  padding: 1.2rem 0;
+  gap: 2rem;
+}
+
+.promo-banner-message {
+  margin: 0 0;
+  font-family: var(--primary-font);
+  font-weight: 500;
+  display: flex;
+  column-gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.promo-banner-message p {
+  margin: 0;
+}
+.promo-banner-text-button .promo-bar-banner-button {
+  align-items: center;
+  margin-left: auto;
+  padding: 0;
+  min-height: auto;
+  min-width: auto;
+  white-space: nowrap;
+  background-color: transparent !important;
+}
+
+@media screen and (min-width: 750px) {
+  .promo-banner-text-button {
+    padding: 2rem 0;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .promo-banner-text-button {
+    padding: 2.4rem 0;
+  }
+}

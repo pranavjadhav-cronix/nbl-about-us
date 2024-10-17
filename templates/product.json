@@ -1,0 +1,234 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "bottom_description_kjn37w": {
+          "type": "bottom_description",
+          "settings": {
+            "heading": "Description"
+          }
+        },
+        "accordion_aEMLLq": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Specifications",
+            "content_1_heading": "Specifications",
+            "content_1_content": "<p>This are specifications content</p>",
+            "content_2_heading": "",
+            "content_2_content": ""
+          }
+        },
+        "accordion_nHfzJ6": {
+          "type": "accordion",
+          "settings": {
+            "heading": "Shippings & Returns",
+            "content_1_heading": "Shipping",
+            "content_1_content": "<p>Free Standard shipping on all US orders $99 and over. Standard orders typically ship within 1-3 business days, and Expedited orders placed by 1PM ET ship the same day. Shipping rates are calculated based on items ordered, shipment destination, and value of your purchase, and does not include customs, duties & service fees (where applicable). See our full Shipping & Handling and Customs & Duties details. </p>",
+            "content_2_heading": "Returns",
+            "content_2_content": "<p>For products purchased on nobullproject.com and delivered within the United States; we offer free returns and exchanges within 30 days of delivery using our provided pre-paid label. At this time, exchanges for products delivered outside of the US are unavailable and international customers are responsible for returning them at their own cost. See our full Returns & Exchange Policy.</p>"
+          }
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "bottom_description_kjn37w",
+        "accordion_aEMLLq",
+        "accordion_nHfzJ6",
+        "buy_buttons",
+        "share"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "enable_sticky_nav": true,
+        "sticky_add_to_cart": true,
+        "color_scheme": "scheme-1",
+        "media_size": "large",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail_slider",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "mobile_thumbnails": "hide",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 0,
+        "padding_bottom": 12
+      }
+    },
+    "characteristics_module_xq3GQb": {
+      "type": "characteristics-module",
+      "blocks": {
+        "only_text_GfDtJE": {
+          "type": "only_text",
+          "settings": {
+            "text": "<p>Removable molded <br/>anatomical insole</p>"
+          }
+        },
+        "only_text_XwEpzc": {
+          "type": "only_text",
+          "settings": {
+            "text": "<p>Reflective laces and <br/>branding for visibility</p>"
+          }
+        },
+        "only_text_hBC4Ck": {
+          "type": "only_text",
+          "settings": {
+            "text": "<p>Medial post for motion <br/>control</p>"
+          }
+        },
+        "progress_bar_i7DtCz": {
+          "type": "progress_bar",
+          "settings": {
+            "heading": "Cushioning",
+            "progress_number": "0",
+            "first_heading": "Hard",
+            "end_heading": "Bouncy",
+            "tooltip_image": "shopify://shop_images/RSRWHTGUM-WHITE-GUM-RIPSTOP-RUNNER-Web-Detail1a.png",
+            "title": "Durable Comfort",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consequat porta ultrices dolor sit amet consectetur elit. "
+          }
+        },
+        "progress_bar_g4GY7x": {
+          "type": "progress_bar",
+          "settings": {
+            "heading": "Support",
+            "progress_number": "0",
+            "first_heading": "Stable",
+            "end_heading": "Flexible",
+            "tooltip_image": "shopify://shop_images/RSRWHTGUM-WHITE-GUM-RIPSTOP-RUNNER-Web-Detail1a.png",
+            "title": "Durable Comfort",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consequat porta ultrices dolor sit amet consectetur elit. "
+          }
+        },
+        "progress_bar_6fAegF": {
+          "type": "progress_bar",
+          "settings": {
+            "heading": "Traction",
+            "progress_number": "2",
+            "first_heading": "Grip",
+            "end_heading": "Movement",
+            "tooltip_image": "shopify://shop_images/RSRWHTGUM-WHITE-GUM-RIPSTOP-RUNNER-Web-Detail1a.png",
+            "title": "Durable Comfort",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consequat porta ultrices dolor sit amet consectetur elit. "
+          }
+        },
+        "progress_bar_DttC3w": {
+          "type": "progress_bar",
+          "settings": {
+            "heading": "Breathability",
+            "progress_number": "4",
+            "first_heading": "Sturdy",
+            "end_heading": "Airflow",
+            "tooltip_image": "shopify://shop_images/RSRWHTGUM-WHITE-GUM-RIPSTOP-RUNNER-Web-Detail1a.png",
+            "title": "Durable Comfort",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consequat porta ultrices dolor sit amet consectetur elit. "
+          }
+        },
+        "progress_bar_YQCwy9": {
+          "type": "progress_bar",
+          "settings": {
+            "heading": "Protection",
+            "progress_number": "4",
+            "first_heading": "Light",
+            "end_heading": "Heavy",
+            "tooltip_image": "shopify://shop_images/RSRWHTGUM-WHITE-GUM-RIPSTOP-RUNNER-Web-Detail1a.png",
+            "title": "Durable Comfort",
+            "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consequat porta ultrices dolor sit amet consectetur elit. "
+          }
+        }
+      },
+      "block_order": [
+        "only_text_GfDtJE",
+        "only_text_XwEpzc",
+        "only_text_hBC4Ck",
+        "progress_bar_i7DtCz",
+        "progress_bar_g4GY7x",
+        "progress_bar_6fAegF",
+        "progress_bar_DttC3w",
+        "progress_bar_YQCwy9"
+      ],
+      "settings": {
+        "heading": "Stability Running Shoe",
+        "color_scheme": "scheme-2",
+        "tooltip_back_color": "#2d2828",
+        "tooltip_text_color": "#fdfcf9",
+        "progressbar_color": "#a0a0a0",
+        "progressbar_fill_color": "#cb9653",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "columns_mobile": "2",
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    }
+  },
+  "order": ["main", "characteristics_module_xq3GQb", "related-products"]
+}

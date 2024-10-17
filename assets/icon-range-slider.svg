@@ -1,0 +1,6 @@
+<svg width="80" height="24" viewBox="0 0 80 24" fill="none" xmlns="http://www.w3.org/2000/svg" class='icon icon-range-slider'>
+    <rect width="80" height="24" rx="12" fill="#CB9653"/>
+    <path d="M36 16L36 8" stroke="#2D2828" stroke-linecap="square"/>
+    <path d="M40 16L40 8" stroke="#2D2828" stroke-linecap="square"/>
+    <path d="M44 16L44 8" stroke="#2D2828" stroke-linecap="square"/>
+</svg>

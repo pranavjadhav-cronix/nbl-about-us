@@ -1,0 +1,305 @@
+{{ 'characteristics-module.css' | asset_url | stylesheet_tag }}
+<script src='{{ 'characteristics-module.js' | asset_url }}' defer='defer'></script>
+
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    #shopify-section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .main-tooltip-popup,
+  .main-progress-with-text .steper-handle:after{
+    background-color:{{ section.settings.tooltip_back_color }};
+  }
+  .main-progress-with-text .heading,
+  .main-tooltip-popup .popup-content .text,
+  .main-tooltip-popup .tooltip-close-btn{
+    color:{{ section.settings.tooltip_text_color }};
+  }
+  
+  .main-progress-with-text .steper-handle,
+  .main-progress-with-text progress::-webkit-progress-value{
+    background-color:{{ section.settings.progressbar_fill_color }};
+  }
+
+  .flex-progress-label,
+  .main-progress-with-text .tooltip-btn{
+    color:{{ section.settings.progressbar_color }};
+  }
+  .multiple-progress-step .step{
+    background-color:{{ section.settings.progressbar_color }};
+  }
+  .multiple-progress-step:before{
+    border-color:{{ section.settings.progressbar_color }};
+  }
+{%- endstyle -%}
+
+
+<div class="characteristics-module-section color-{{ section.settings.color_scheme }} gradient">
+    {% if section.settings.image != blank %}
+      <div class="module-image-main">
+        {{ section.settings.image | image_url: width: '1440' | image_tag: loading: 'lazy', height: '810', widths: '1440', class: 'module-image', alt: section.settings.heading }}
+      </div>
+    {% endif %}
+    <div class="multiple-content-module" role="region" aria-labelledby="module-heading">
+      <div class="page-width">
+        <div class="multiple-content-module-inner grid ">
+          <div class="left-side-content grid__item ">
+            <h2 id="module-heading" class="heading">{{ section.settings.heading }}</h2>
+            <div class="multiple-only-text">
+              {% for block in section.blocks %}
+                {% case block.type %}
+                  {% when 'only_text' %}
+                    {% if block.settings.text != blank %}
+                      <div class="single_text">
+                        <span class="counter-number" aria-hidden="true">
+                          {% if forloop.index < 10 %}
+                            0{{ forloop.index }}
+                          {% else %}
+                            {{ forloop.index }}
+                          {% endif %}
+                        </span>
+                        <div class="text" aria-describedby="description-text">{{ block.settings.text }}</div>
+                      </div>
+                    {% endif %}
+                {% endcase %}
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="right-side-content grid__item  multiple-progress-bar">
+            {% for block in section.blocks %}
+              {% case block.type %}
+                {% when 'progress_bar' %}
+                  <div class="main-progress-with-text" role="region" aria-labelledby="progress-heading-{{ forloop.index }}">
+                    {% if block.settings.heading != blank %}
+                      <div class="left-heading">
+                        <h2 class="heading" id="progress-heading-{{ forloop.index }}">
+                          {{ block.settings.heading }}
+                          <button aria-label="Show tooltip" class="tooltip-btn">
+                            {{ 'icon-tooltip.svg' | inline_asset_content }}
+                          </button>
+                        </h2>
+                        <div class="main-tooltip-popup" role="tooltip" aria-hidden="true">
+                          <button aria-label="Show tooltip" class="tooltip-close-btn">
+                            {{ 'icon-popup-close.svg' | inline_asset_content }}
+                          </button>
+                          <div class="flex-popup-content">
+                            {% if block.settings.tooltip_image != blank %}
+                              <div class="popup-image">
+                                {{ block.settings.tooltip_image | image_url: width: '400' | image_tag: loading: 'lazy', height: '400', widths: '400', class: 'popup-tooltip-image', alt: block.settings.title }}
+                              </div>
+                            {% endif %}
+                            {% if block.settings.title != blank or block.settings.text != blank %}
+                              <div class="popup-content">
+                                {% if block.settings.title != blank %}
+                                  <h2 class="heading">{{ block.settings.title }}</h2>
+                                {% endif %}
+                                {% if block.settings.text != blank %}
+                                  <p class="text">{{ block.settings.text }}</p>
+                                {% endif %}
+                              </div>
+                            {% endif %}
+                          </div>
+                        </div>
+                      </div>
+                    {% endif %}
+
+                    <div class="right-progress-bar">
+                      {% assign progress_width = 0| plus: 25 | times: block.settings.progress_number %}
+                      <div id="progress-{{ block.id }}" class="multiple-progress-step">
+                        <style>
+                          .progressbar-active #progress-{{ block.id }} .steper-handle {
+                            left:calc({{ progress_width }}% - 1.2rem);
+                          }
+                        </style>
+                        <span class="step big" aria-hidden="true"></span>
+                        <span class="step" aria-hidden="true"></span>
+                        <span class="step" aria-hidden="true"></span>
+                        <span class="step" aria-hidden="true"></span>
+                        <span class="step big" aria-hidden="true"></span>
+                        <progress value="{{ progress_width }}" max="100" aria-valuenow="{{ progress_width }}" aria-valuemin="0" aria-valuemax="100" aria-describedby="progress-label-{{ forloop.index }}"> 
+                          {{ progress_width }}% 
+                        </progress>
+                        <span class="steper-handle progress-value-{{ progress_width }}"></span>
+                      </div>
+                      {% if block.settings.first_heading != blank or block.settings.end_heading != blank %}
+                        <div class="flex-progress-label" id="progress-label-{{ forloop.index }}">
+                          {% if block.settings.first_heading != blank %}
+                            <span class="left-label">{{ block.settings.first_heading }}</span>
+                          {% endif %}
+                          {% if block.settings.end_heading != blank %}
+                            <span class="right-label">{{ block.settings.end_heading }}</span>
+                          {% endif %}
+                        </div>
+                      {% endif %}
+                    </div>
+                  </div>
+              {% endcase %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
+{% schema %}
+  {
+    "name":"t:sections.characteristic_model.name",
+    "tag": "section",
+    "class": "section",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "t:sections.characteristic_model.settings.image.label"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "t:sections.characteristic_model.settings.heading.label"
+      },
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "t:sections.all.colors.label",
+        "info": "t:sections.all.colors.has_cards_info",
+        "default": "scheme-1"
+      },
+      {
+        "type": "color",
+        "id": "tooltip_back_color",
+        "label": "t:sections.all.tooltip.tooltip_colors",
+        "default": "#2D2828"
+      },
+      {
+        "type": "color",
+        "id": "tooltip_text_color",
+        "label": "t:sections.all.tooltip.tooltip_text_colors",
+        "default": "#FDFCF9"
+      },
+      {
+        "type": "color",
+        "id": "progressbar_color",
+        "label": "t:sections.all.progressbar.progressbar_color",
+        "default": "#A0A0A0"
+      },
+      {
+        "type": "color",
+        "id": "progressbar_fill_color",
+        "label": "t:sections.all.progressbar.progressbar_fill_color",
+        "default": "#CB9653"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.all.padding.section_padding_heading"
+      },
+      {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_top",
+        "default": 0
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 100,
+        "step": 4,
+        "unit": "px",
+        "label": "t:sections.all.padding.padding_bottom",
+        "default": 0
+      }
+    ],
+    "blocks": [
+      {
+        "type": "only_text",
+        "name": "t:sections.characteristic_model.blocks.only_text.name",
+        "settings": [
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "t:sections.characteristic_model.blocks.only_text.settings.text.label"
+          }
+        ]
+      },
+      {
+        "type": "progress_bar",
+        "name": "t:sections.characteristic_model.blocks.progress_bar.name",
+        "settings": [
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "t:sections.characteristic_model.blocks.progress_bar.settings.heading.label"
+          },
+          {
+            "type": "select",
+            "id": "progress_number",
+            "label": "t:sections.characteristic_model.blocks.progress_bar.settings.progress_number.label",
+            "default": "0",
+            "options": [
+              {
+                "value": "0",
+                "label": "1"
+              },
+              {
+                "value": "2",
+                "label": "3"
+              },
+              {
+                "value": "4",
+                "label": "5"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "id": "first_heading",
+            "label": "t:sections.characteristic_model.blocks.progress_bar.settings.first_heading.label"
+          },
+          {
+            "type": "text",
+            "id": "end_heading",
+            "label": "t:sections.characteristic_model.blocks.progress_bar.settings.end_heading.label"
+          },
+          {
+            "type": "header",
+            "content": "t:sections.characteristic_model.blocks.progress_bar.settings.tooltip.content"
+          },
+          {
+            "type": "image_picker",
+            "id": "tooltip_image",
+            "label": "t:sections.characteristic_model.blocks.progress_bar.settings.tooltip_image.label"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "t:sections.characteristic_model.blocks.progress_bar.settings.title.label"
+          },
+          {
+            "type": "inline_richtext",
+            "id": "text",
+            "label": "t:sections.characteristic_model.blocks.progress_bar.settings.text.label"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.characteristic_model.name"
+      }
+    ]
+  }
+  {% endschema %}
+  

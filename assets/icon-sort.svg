@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" class='icon icon-sort'>
+  <path d="M4.6001 19L4.6001 1" stroke="#050505" stroke-width="1.75" stroke-linecap="round"/>
+  <path d="M8.2001 4.6L4.7592 1.1591C4.67133 1.07123 4.52887 1.07123 4.441 1.1591L1.0001 4.6" stroke="black" stroke-width="1.75" stroke-linecap="round"/>
+  <path d="M15.3999 1L15.3999 19" stroke="#050505" stroke-width="1.75" stroke-linecap="round"/>
+  <path d="M11.7999 15.4L15.2408 18.8409C15.3287 18.9288 15.4711 18.9288 15.559 18.8409L18.9999 15.4" stroke="black" stroke-width="1.75" stroke-linecap="round"/>
+</svg>

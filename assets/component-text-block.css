@@ -1,0 +1,123 @@
+.section-text-block {
+  border-bottom: 1px solid;
+  padding: 4.8rem 0 4.8rem 0;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.section-text-block-col-1 {
+  flex: 100%;
+  max-width: 100%;
+  margin-bottom: 4.6rem;
+}
+
+.section-text-block-col-2 {
+  flex: 100%;
+  max-width: 100%;
+  margin-bottom: 0;
+  margin-left: auto;
+  position: relative;
+}
+
+.section-text-block-main-text {
+  font-family: var(--secondary-font-extended);
+  font-size: 4rem;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  margin: 0;
+}
+
+.section-text-block-quote-text {
+  font-size: 1em;
+  line-height: 2rem;
+  font-family: var(--secondary-font);
+  font-weight: 300;
+  margin-top: 0;
+  margin-bottom: 2.5rem;
+  max-width: 15rem;
+  text-transform: uppercase;
+}
+.section-text-block-quote-text.section-text-block-quote-text--last {
+  margin-bottom: 0rem;
+}
+
+.section-text-block-image,
+.section-text-block-col-2 .icon-nobull {
+  margin-top: auto;
+  margin-bottom: 0rem;
+  max-width: 100%;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+@media (min-width: 750px) {
+  .section-text-block {
+    padding: 4.8rem 0 3rem 0;
+  }
+
+  .section-text-block-col-1 {
+    flex: 63%;
+    max-width: 63%;
+    margin-bottom: unset;
+  }
+
+  .section-text-block-col-2 {
+    flex: 25%;
+    max-width: 25%;
+    min-height: 332px;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .section-text-block-main-text {
+    font-size: 4.8rem;
+    line-height: 1.0416675;
+    margin: 0 2rem 0 0;
+  }
+
+  .section-text-block-quote-text.section-text-block-quote-text--last {
+    margin-bottom: 2.5rem;
+  }
+
+  .section-text-block-image,
+  .section-text-block-col-2 .icon-nobull {
+    margin-top: auto;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+}
+
+@media (min-width: 1280px) {
+  .section-text-block-main-text {
+    font-size: 8.2rem;
+    line-height: 1.02439;
+  }
+  .section-text-block-quote-text {
+    font-size: 1em;
+    line-height: 2rem;
+  }
+
+  .section-text-block {
+    padding: 6.6rem 0 17.7rem 0;
+  }
+
+  .section-text-block-col-1 {
+    flex: 75%;
+    max-width: 75%;
+  }
+
+  .section-text-block-col-2 {
+    flex: 15%;
+    max-width: 15%;
+    margin-left: auto;
+  }
+
+  .section-text-block-main-text {
+    margin: 0 2rem 0 0;
+  }
+}

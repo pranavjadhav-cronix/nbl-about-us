@@ -1,0 +1,84 @@
+{{ 'component-text-block.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+
+    @media screen and (min-width: 750px) {
+      .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+      }
+    }
+
+    .section-text-block {
+    border-color: var(--color-link);
+  }
+{%- endstyle -%}
+
+<div class='page-width'>
+  <div class='row {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}'>
+    <div class='section-text-block-col-1'>
+      <h2 class='section-text-block-main-text font-secondary sm md-md lg-lg'>{{ section.settings.main_text }}</h2>
+    </div>
+
+    <div class='section-text-block-col-2'>
+      <p class='section-text-block-quote-text'>{{ section.settings.quote_1 }}</p>
+      <p class='section-text-block-quote-text section-text-block-quote-text--last'>{{ section.settings.quote_2 }}</p>
+
+      {%- if section.settings.image != blank -%}
+        <img
+          src='{{ section.settings.image | image_url: width: 103 }}'
+          loading='lazy'
+          alt='{{ section.settings.image.alt | escape }}'
+          width='{{ section.settings.image.width }}'
+          height=''
+          class='section-text-block-image'
+        >
+      {%- else -%}
+        {{ 'icon-nobull.svg' | inline_asset_content }}
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Text Block Module",
+  "tag": "section",
+  "class": "section-text-block",
+  "settings": [
+    {
+      "type": "text",
+      "id": "main_text",
+      "label": "t:sections.text-block.settings.main_text.label",
+      "default": "t:sections.text-block.settings.main_text.default"
+    },
+    {
+      "type": "text",
+      "id": "quote_1",
+      "label": "t:sections.text-block.settings.quote_1.label",
+      "default": "t:sections.text-block.settings.quote_1.default"
+    },
+    {
+      "type": "text",
+      "id": "quote_2",
+      "label": "t:sections.text-block.settings.quote_2.label",
+      "default": "t:sections.text-block.settings.quote_2.default"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.text-block.settings.image.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Text Block Module",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,254 @@
+{%- for filter in filters -%}
+  {% liquid
+    assign default_presentation = 'text'
+    assign presentation = filter.presentation | default: default_presentation
+
+    if presentation == 'image'
+      assign show_more_number = 12
+      assign visual_layout_class = 'facets-layout facets-layout-grid facets-layout-grid--' | append: presentation
+    else
+      assign show_more_number = 10
+      assign visual_layout_class = 'facets-layout facets-layout-list facets-layout-list--' | append: presentation
+    endif
+  %}
+
+  {% case filter.type %}
+    {% when 'boolean', 'list' %}
+      <div
+        id='Details-{% if is_mobile %}-Mobile{% endif %}{{ filter.param_name | escape }}-{{ section.id }}'
+        class='{% if is_mobile %}mobile-facets__details page-width{% elsif filter_type == 'horizontal' %}disclosure-has-popup facets__disclosure{% else %} facets__disclosure-vertical{% endif %} js-filter'
+        data-index='{% if is_mobile %}mobile-{% endif %}{{ forloop.index }}'
+      >
+        <div
+          class='{% if is_mobile %}mobile-{% endif %}facets__summary focus-offset'
+        >
+          <span class='facets__summary-label font-secondary mono-lg md-mono-sm'>
+            {{- filter.label | escape }}
+          </span>
+          <button
+            class='mobile-facets__accordion-button ignore-close medium-hide large-up-hide'
+            aria-expanded='false'
+            aria-controls='FacetMobile-{{ forloop.index }}-{{ section.id }}'
+          >
+            {{ 'icon-accordion-expanded.svg' | inline_asset_content }}
+            {{ 'icon-accordion-collapsed.svg' | inline_asset_content }}
+          </button>
+        </div>
+        <div
+          id='Facet{% if is_mobile %}Mobile{% endif %}-{{ forloop.index }}-{{ section.id }}'
+          class='{% if is_mobile %}mobile-facets__accordion-content gradient{% else %}parent-display {% if filter_type == 'horizontal' %}facets__display{% else %}facets__display-vertical{% endif %}{% endif %}'
+          {% if is_mobile %}
+            hidden
+          {% endif %}
+        >
+          {%- if is_mobile == false and filter_type != 'vertical' -%}
+            <div class='facets__header'>
+              <div>
+                <span class='facets__selected'>
+                  {{- 'products.facets.filters_selected' | t: count: filter.active_values.size -}}
+                </span>
+                {%- if filter.operator == 'AND' -%}
+                  <span class='facets__and-helptext'>
+                    {{ 'products.facets.filter_and_operator_subtitle' | t }}
+                  </span>
+                {%- endif -%}
+              </div>
+              <facet-remove>
+                <a href='{{ filter.url_to_remove }}' class='facets__reset link underlined-link'>
+                  {{ 'products.facets.reset' | t }}
+                </a>
+              </facet-remove>
+            </div>
+          {%- endif -%}
+          <fieldset
+            class='facets-wrap parent-wrap{% if filter_type == 'vertical' %} facets-wrap-vertical{% endif %}'
+          >
+            <legend class='visually-hidden'>{{ filter.label | escape }}</legend>
+            {%- liquid
+              assign sorted_values = filter.values
+              # Keep the selected values grouped together when operator is AND
+              if filter.operator == 'AND'
+                assign active_filter_values = filter.values | where: 'active', true
+                assign inactive_filter_values = filter.values | where: 'active', false
+                assign sorted_values = active_filter_values | concat: inactive_filter_values
+              endif
+            -%}
+            <ul
+              class='{{ visual_layout_class }}{% if is_mobile %} mobile-facets__list{% elsif filter_type == 'vertical' %} facets__list--vertical{% else %} facets__list{% endif %} presentation-{{ presentation }} list-unstyled'
+              role='list'
+            >
+              {%- for value in sorted_values -%}
+                {% liquid
+                  assign is_disabled = false
+                  if value.count == 0 and value.active == false
+                    assign is_disabled = true
+                  endif
+                %}
+
+                {% render 'facets-checkbox',
+                  is_mobile: is_mobile,
+                  value_active: value.active,
+                  value_label: value.label,
+                  presentation: presentation,
+                  param_name: filter.param_name,
+                  value: value.value,
+                  is_disabled: is_disabled,
+                  index: forloop.index,
+                  value_swatch: value.swatch,
+                  value_image: value.image,
+                  value_alt: value.alt
+                %}
+              {%- endfor -%}
+            </ul>
+          </fieldset>
+          {%- if is_mobile == false and filter.values.size > show_more_number and filter_type == 'vertical' -%}
+            <show-more-button>
+              <button
+                class='button-show-more link underlined-link'
+                id='Show-More-{{ forloop.index }}-{{ section.id }}'
+                type='button'
+              >
+                <span class='label-show-more label-text'
+                  ><span aria-hidden='true'>+ </span>{{ 'products.facets.show_more' | t -}}
+                </span>
+                <span class='label-show-less label-text hidden'
+                  ><span aria-hidden='true'>- </span>{{ 'products.facets.show_less' | t -}}
+                </span>
+              </button>
+            </show-more-button>
+          {%- endif %}
+        </div>
+      </div>
+    {% when 'price_range' %}
+      <div
+        id='Details-{% if is_mobile %}-Mobile{% endif %}{{ filter.param_name | escape }}-{{ section.id }}'
+        class='{% if is_mobile %}mobile-facets__details page-width{% elsif filter_type == 'horizontal' %}disclosure-has-popup facets__disclosure{% else %} facets__disclosure-vertical{% endif %} js-filter'
+        data-index='{% if is_mobile %}mobile-{% endif %}{{ forloop.index }}'
+      >
+        <div class='{% if is_mobile %}mobile-{% endif %}facets__summary'>
+          <span class='facets__summary-label font-secondary mono-lg md-mono-sm'>{{ filter.label | escape }}</span>
+          <button
+            class='mobile-facets__accordion-button medium-hide large-up-hide ignore-close'
+            aria-expanded='false'
+            aria-controls='FacetMobile-{{ forloop.index }}-{{ section.id }}'
+          >
+            {{ 'icon-accordion-expanded.svg' | inline_asset_content }}
+            {{ 'icon-accordion-collapsed.svg' | inline_asset_content }}
+          </button>
+        </div>
+        <div
+          id='Facet{% if is_mobile %}Mobile{% endif %}-{{ forloop.index }}-{{ section.id }}'
+          class='{% if is_mobile %}mobile-facets__accordion-content gradient{% else %}{% if filter_type == 'horizontal' %}facets__display{% else %}facets__display-vertical{% endif %}{% endif %}'
+          {% if is_mobile %}
+            hidden
+          {% endif %}
+        >
+          {%- assign max_price_amount = filter.range_max | money | strip_html | escape -%}
+          {% if is_mobile %}
+            <p class='mobile-facets__info'>
+              {{ 'products.facets.max_price' | t: price: max_price_amount }}
+            </p>
+            <price-range class='facets__price'>
+              {% render 'price-facet', filter: filter, id_prefix: 'Mobile-Filter-' %}
+            </price-range>
+          {% else %}
+            <div class='{% if filter_type == 'horizontal' %}facets__header{% else %}facets__header-vertical{% endif %}'>
+              <span class='facets__selected'>
+                {{- 'products.facets.max_price' | t: price: max_price_amount -}}
+              </span>
+              {%- if filter_type != 'vertical' -%}
+                <facet-remove>
+                  <a href='{{ filter.url_to_remove }}' class='facets__reset link underlined-link'>
+                    {{ 'products.facets.reset' | t }}
+                  </a>
+                </facet-remove>
+              {%- endif -%}
+            </div>
+            <price-range class='facets__price'>
+              {% render 'price-facet', filter: filter, id_prefix: 'Filter-', filter_type: filter_type %}
+            </price-range>
+          {% endif %}
+        </div>
+      </div>
+    {% when 'range' %}
+      <div
+        id='Details-{% if is_mobile %}-Mobile{% endif %}{{ filter.param_name | escape }}-{{ section.id }}'
+        class='{% if is_mobile %}mobile-facets__details page-width{% elsif filter_type == 'horizontal' %}disclosure-has-popup facets__disclosure{% else %} facets__disclosure-vertical{% endif %} js-filter'
+        data-index='{% if is_mobile %}mobile-{% endif %}{{ forloop.index }}'
+      >
+        <div
+          class='{% if is_mobile %}mobile-{% endif %}facets__summary focus-offset'
+        >
+          <span class='facets__summary-label font-secondary mono-lg md-mono-sm'>
+            {{- filter.label | escape }}
+          </span>
+          <button
+            class='mobile-facets__accordion-button ignore-close medium-hide large-up-hide'
+            aria-expanded='false'
+            aria-controls='FacetMobile-{{ forloop.index }}-{{ section.id }}'
+          >
+            {{ 'icon-accordion-expanded.svg' | inline_asset_content }}
+            {{ 'icon-accordion-collapsed.svg' | inline_asset_content }}
+          </button>
+        </div>
+        <div
+          id='Facet{% if is_mobile %}Mobile{% endif %}-{{ forloop.index }}-{{ section.id }}'
+          class='{% if is_mobile %}mobile-facets__accordion-content gradient{% else %}parent-display {% if filter_type == 'horizontal' %}facets__display{% else %}facets__display-vertical{% endif %}{% endif %}'
+          {% if is_mobile %}
+            hidden
+          {% endif %}
+        >
+          {%- if is_mobile == false and filter_type != 'vertical' -%}
+            <div class='facets__header'>
+              <div>
+                <span class='facets__selected'>
+                  {{- 'products.facets.filters_selected' | t: count: active_values_size -}}
+                </span>
+                {%- if filter.operator == 'AND' -%}
+                  <span class='facets__and-helptext'>
+                    {{ 'products.facets.filter_and_operator_subtitle' | t }}
+                  </span>
+                {%- endif -%}
+              </div>
+              <facet-remove>
+                <a href='{{ filter.url_to_remove }}' class='facets__reset link underlined-link'>
+                  {{ 'products.facets.reset' | t }}
+                </a>
+              </facet-remove>
+            </div>
+          {%- endif -%}
+          <fieldset
+            class='facets-wrap parent-wrap{% if filter_type == 'vertical' %} facets-wrap-vertical{% endif %}'
+          >
+            <legend class='visually-hidden'>{{ filter.label | escape }}</legend>
+            <ul
+              class='{{ visual_layout_class }}{% if is_mobile %} mobile-facets__list{% elsif filter_type == 'vertical' %} facets__list--vertical{% else %} facets__list{% endif %} presentation-{{ presentation }} list-unstyled'
+              role='list'
+            >
+              {%- for value in filter.values -%}
+                {% liquid
+                  assign is_disabled = false
+                  if value.count == 0 and value.active == false
+                    assign is_disabled = true
+                  endif
+                %}
+
+                {% render 'facets-range',
+                  is_mobile: is_mobile,
+                  value_active: value.active,
+                  value_label: value.label,
+                  presentation: presentation,
+                  param_name: filter.param_name,
+                  value: value.value,
+                  is_disabled: is_disabled,
+                  index: forloop.index,
+                  info_left_value: value.info_left_value,
+                  info_right_value: value.info_right_value
+                %}
+              {%- endfor -%}
+            </ul>
+          </fieldset>
+        </div>
+      </div>
+  {% endcase %}
+{%- endfor -%}

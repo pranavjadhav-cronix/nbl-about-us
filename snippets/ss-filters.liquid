@@ -1,0 +1,1442 @@
+{% liquid
+  assign visual_layout_class = 'facets-layout facets-layout-list facets-layout-list--swatch'
+
+  assign index = 1
+  assign param_name = 'color'
+  assign label = 'Color'
+  assign active_values_size = 0
+  assign operator = 'AND'
+  assign url_to_remove = '/collections/all'
+  assign is_disabled = false
+  assign presentation = 'swatch'
+%}
+
+<div
+  id='Details-{% if is_mobile %}-Mobile{% endif %}{{ param_name | escape }}-{{ section.id }}'
+  class='{% if is_mobile %}mobile-facets__details page-width{% elsif filter_type == 'horizontal' %}disclosure-has-popup facets__disclosure{% else %} facets__disclosure-vertical{% endif %} js-filter'
+  data-index='{% if is_mobile %}mobile-{% endif %}{{ index }}'
+>
+  <div
+    class='{% if is_mobile %}mobile-{% endif %}facets__summary focus-offset'
+  >
+    <span class='facets__summary-label font-secondary mono-lg md-mono-sm'>
+      {{- label | escape }}
+    </span>
+    <button
+      class='mobile-facets__accordion-button ignore-close medium-hide large-up-hide'
+      aria-expanded='false'
+      aria-controls='FacetMobile-{{ index }}-{{ section.id }}'
+    >
+      {{ 'icon-accordion-expanded.svg' | inline_asset_content }}
+      {{ 'icon-accordion-collapsed.svg' | inline_asset_content }}
+    </button>
+  </div>
+  <div
+    id='Facet{% if is_mobile %}Mobile{% endif %}-{{ index }}-{{ section.id }}'
+    class='{% if is_mobile %}mobile-facets__accordion-content gradient{% else %}parent-display {% if filter_type == 'horizontal' %}facets__display{% else %}facets__display-vertical{% endif %}{% endif %}'
+    {% if is_mobile %}
+      hidden
+    {% endif %}
+  >
+    {%- if is_mobile == false and filter_type != 'vertical' -%}
+      <div class='facets__header'>
+        <div>
+          <span class='facets__selected'>
+            {{- 'products.facets.filters_selected' | t: count: active_values_size -}}
+          </span>
+          {%- if operator == 'AND' -%}
+            <span class='facets__and-helptext'>
+              {{ 'products.facets.filter_and_operator_subtitle' | t }}
+            </span>
+          {%- endif -%}
+        </div>
+        <facet-remove>
+          <a href='{{ url_to_remove }}' class='facets__reset link underlined-link'>
+            {{ 'products.facets.reset' | t }}
+          </a>
+        </facet-remove>
+      </div>
+    {%- endif -%}
+    <fieldset
+      class='facets-wrap parent-wrap{% if filter_type == 'vertical' %} facets-wrap-vertical{% endif %}'
+    >
+      <legend class='visually-hidden'>{{ label | escape }}</legend>
+      <ul
+        class='{{ visual_layout_class }}{% if is_mobile %} mobile-facets__list{% elsif filter_type == 'vertical' %} facets__list--vertical{% else %} facets__list{% endif %} presentation-{{ presentation }} list-unstyled'
+        role='list'
+      >
+        {% liquid
+          assign v_index = 1
+          assign value_label = 'White'
+          assign value_value = 'white'
+          assign value_swatch = ''
+          assign value_active = false
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 2
+          assign value_label = 'Black'
+          assign value_value = 'black'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 3
+          assign value_label = 'Gray'
+          assign value_value = 'gray'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 4
+          assign value_label = 'Red'
+          assign value_value = 'red'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 5
+          assign value_label = 'Multi-color'
+          assign value_value = 'multicolor'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 6
+          assign value_label = 'Purple'
+          assign value_value = 'purple'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 7
+          assign value_label = 'Pink'
+          assign value_value = 'pink'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 8
+          assign value_label = 'Blue'
+          assign value_value = 'blue'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 9
+          assign value_label = 'Brown'
+          assign value_value = 'brown'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 10
+          assign value_label = 'Green'
+          assign value_value = 'green'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 11
+          assign value_label = 'Yellow'
+          assign value_value = 'yellow'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+      </ul>
+    </fieldset>
+  </div>
+</div>
+
+{% liquid
+  assign visual_layout_class = 'facets-layout facets-layout-list facets-layout-list--square'
+
+  assign index = 2
+  assign param_name = 'us_size'
+  assign label = 'US Size'
+  assign presentation = 'square'
+%}
+
+<div
+  id='Details-{% if is_mobile %}-Mobile{% endif %}{{ param_name | escape }}-{{ section.id }}'
+  class='{% if is_mobile %}mobile-facets__details page-width{% elsif filter_type == 'horizontal' %}disclosure-has-popup facets__disclosure{% else %} facets__disclosure-vertical{% endif %} js-filter'
+  data-index='{% if is_mobile %}mobile-{% endif %}{{ index }}'
+>
+  <div
+    class='{% if is_mobile %}mobile-{% endif %}facets__summary focus-offset'
+  >
+    <span class='facets__summary-label font-secondary mono-lg md-mono-sm'>
+      {{- label | escape }}
+    </span>
+    <button
+      class='mobile-facets__accordion-button ignore-close medium-hide large-up-hide'
+      aria-expanded='false'
+      aria-controls='FacetMobile-{{ index }}-{{ section.id }}'
+    >
+      {{ 'icon-accordion-expanded.svg' | inline_asset_content }}
+      {{ 'icon-accordion-collapsed.svg' | inline_asset_content }}
+    </button>
+  </div>
+  <div
+    id='Facet{% if is_mobile %}Mobile{% endif %}-{{ index }}-{{ section.id }}'
+    class='{% if is_mobile %}mobile-facets__accordion-content gradient{% else %}parent-display {% if filter_type == 'horizontal' %}facets__display{% else %}facets__display-vertical{% endif %}{% endif %}'
+    {% if is_mobile %}
+      hidden
+    {% endif %}
+  >
+    {%- if is_mobile == false and filter_type != 'vertical' -%}
+      <div class='facets__header'>
+        <div>
+          <span class='facets__selected'>
+            {{- 'products.facets.filters_selected' | t: count: active_values_size -}}
+          </span>
+          {%- if operator == 'AND' -%}
+            <span class='facets__and-helptext'>
+              {{ 'products.facets.filter_and_operator_subtitle' | t }}
+            </span>
+          {%- endif -%}
+        </div>
+        <facet-remove>
+          <a href='{{ url_to_remove }}' class='facets__reset link underlined-link'>
+            {{ 'products.facets.reset' | t }}
+          </a>
+        </facet-remove>
+      </div>
+    {%- endif -%}
+    <fieldset
+      class='facets-wrap parent-wrap{% if filter_type == 'vertical' %} facets-wrap-vertical{% endif %}'
+    >
+      <legend class='visually-hidden'>{{ label | escape }}</legend>
+      <ul
+        class='{{ visual_layout_class }}{% if is_mobile %} mobile-facets__list{% elsif filter_type == 'vertical' %} facets__list--vertical{% else %} facets__list{% endif %} presentation-{{ presentation }} list-unstyled'
+        role='list'
+      >
+        {% liquid
+          assign v_index = 1
+          assign value_label = '5'
+          assign value_value = '5'
+          assign value_active = false
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 2
+          assign value_label = '5.5'
+          assign value_value = '5.5'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 3
+          assign value_label = '6'
+          assign value_value = '6'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 4
+          assign value_label = '6.5'
+          assign value_value = '6.5'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 5
+          assign value_label = '7'
+          assign value_value = '7'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 6
+          assign value_label = '7.5'
+          assign value_value = '7.5'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 7
+          assign value_label = '8'
+          assign value_value = '8'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 8
+          assign value_label = '8.5'
+          assign value_value = '8.5'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 9
+          assign value_label = '9'
+          assign value_value = '9'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 10
+          assign value_label = '9.5'
+          assign value_value = '9.5'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 11
+          assign value_label = '10'
+          assign value_value = '10'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 12
+          assign value_label = '10.5'
+          assign value_value = '10.5'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 13
+          assign value_label = '11'
+          assign value_value = '11'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 14
+          assign value_label = '11.5'
+          assign value_value = '11.5'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 15
+          assign value_label = '12'
+          assign value_value = '12'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 16
+          assign value_label = '12.5'
+          assign value_value = '12.5'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+      </ul>
+    </fieldset>
+  </div>
+</div>
+
+{% liquid
+  assign visual_layout_class = 'facets-layout facets-layout-list facets-layout-list--text'
+
+  assign index = 3
+  assign param_name = 'collection'
+  assign label = 'Collection'
+  assign presentation = 'text'
+%}
+
+<div
+  id='Details-{% if is_mobile %}-Mobile{% endif %}{{ param_name | escape }}-{{ section.id }}'
+  class='{% if is_mobile %}mobile-facets__details page-width{% elsif filter_type == 'horizontal' %}disclosure-has-popup facets__disclosure{% else %} facets__disclosure-vertical{% endif %} js-filter'
+  data-index='{% if is_mobile %}mobile-{% endif %}{{ index }}'
+>
+  <div
+    class='{% if is_mobile %}mobile-{% endif %}facets__summary focus-offset'
+  >
+    <span class='facets__summary-label font-secondary mono-lg md-mono-sm'>
+      {{- label | escape }}
+    </span>
+    <button
+      class='mobile-facets__accordion-button ignore-close medium-hide large-up-hide'
+      aria-expanded='false'
+      aria-controls='FacetMobile-{{ index }}-{{ section.id }}'
+    >
+      {{ 'icon-accordion-expanded.svg' | inline_asset_content }}
+      {{ 'icon-accordion-collapsed.svg' | inline_asset_content }}
+    </button>
+  </div>
+  <div
+    id='Facet{% if is_mobile %}Mobile{% endif %}-{{ index }}-{{ section.id }}'
+    class='{% if is_mobile %}mobile-facets__accordion-content gradient{% else %}parent-display {% if filter_type == 'horizontal' %}facets__display{% else %}facets__display-vertical{% endif %}{% endif %}'
+    {% if is_mobile %}
+      hidden
+    {% endif %}
+  >
+    {%- if is_mobile == false and filter_type != 'vertical' -%}
+      <div class='facets__header'>
+        <div>
+          <span class='facets__selected'>
+            {{- 'products.facets.filters_selected' | t: count: active_values_size -}}
+          </span>
+          {%- if operator == 'AND' -%}
+            <span class='facets__and-helptext'>
+              {{ 'products.facets.filter_and_operator_subtitle' | t }}
+            </span>
+          {%- endif -%}
+        </div>
+        <facet-remove>
+          <a href='{{ url_to_remove }}' class='facets__reset link underlined-link'>
+            {{ 'products.facets.reset' | t }}
+          </a>
+        </facet-remove>
+      </div>
+    {%- endif -%}
+    <fieldset
+      class='facets-wrap parent-wrap{% if filter_type == 'vertical' %} facets-wrap-vertical{% endif %}'
+    >
+      <legend class='visually-hidden'>{{ label | escape }}</legend>
+      <ul
+        class='{{ visual_layout_class }}{% if is_mobile %} mobile-facets__list{% elsif filter_type == 'vertical' %} facets__list--vertical{% else %} facets__list{% endif %} presentation-{{ presentation }} list-unstyled'
+        role='list'
+      >
+        {% liquid
+          assign v_index = 1
+          assign value_label = 'Allday'
+          assign value_value = 'allday'
+          assign value_active = false
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 2
+          assign value_label = 'Aspire'
+          assign value_value = 'aspire'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 3
+          assign value_label = 'Canvas'
+          assign value_value = 'canvas'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 4
+          assign value_label = 'Court'
+          assign value_value = 'court'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 5
+          assign value_label = 'Impact'
+          assign value_value = 'impact'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 6
+          assign value_label = 'Journey'
+          assign value_value = 'journey'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 7
+          assign value_label = 'Drive'
+          assign value_value = 'drive'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 8
+          assign value_label = 'Outwork'
+          assign value_value = 'outwork'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 9
+          assign value_label = 'Recs'
+          assign value_value = 'recs'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+      </ul>
+    </fieldset>
+  </div>
+</div>
+
+{% liquid
+  assign visual_layout_class = 'facets-layout facets-layout-list facets-layout-list--text'
+
+  assign index = 4
+  assign param_name = 'characteristics'
+  assign label = 'Characteristics'
+  assign presentation = 'text'
+%}
+
+<div
+  id='Details-{% if is_mobile %}-Mobile{% endif %}{{ param_name | escape }}-{{ section.id }}'
+  class='{% if is_mobile %}mobile-facets__details page-width{% elsif filter_type == 'horizontal' %}disclosure-has-popup facets__disclosure{% else %} facets__disclosure-vertical{% endif %} js-filter'
+  data-index='{% if is_mobile %}mobile-{% endif %}{{ index }}'
+>
+  <div
+    class='{% if is_mobile %}mobile-{% endif %}facets__summary focus-offset'
+  >
+    <span class='facets__summary-label font-secondary mono-lg md-mono-sm'>
+      {{- label | escape }}
+    </span>
+    <button
+      class='mobile-facets__accordion-button ignore-close medium-hide large-up-hide'
+      aria-expanded='false'
+      aria-controls='FacetMobile-{{ index }}-{{ section.id }}'
+    >
+      {{ 'icon-accordion-expanded.svg' | inline_asset_content }}
+      {{ 'icon-accordion-collapsed.svg' | inline_asset_content }}
+    </button>
+  </div>
+  <div
+    id='Facet{% if is_mobile %}Mobile{% endif %}-{{ index }}-{{ section.id }}'
+    class='{% if is_mobile %}mobile-facets__accordion-content gradient{% else %}parent-display {% if filter_type == 'horizontal' %}facets__display{% else %}facets__display-vertical{% endif %}{% endif %}'
+    {% if is_mobile %}
+      hidden
+    {% endif %}
+  >
+    {%- if is_mobile == false and filter_type != 'vertical' -%}
+      <div class='facets__header'>
+        <div>
+          <span class='facets__selected'>
+            {{- 'products.facets.filters_selected' | t: count: active_values_size -}}
+          </span>
+          {%- if operator == 'AND' -%}
+            <span class='facets__and-helptext'>
+              {{ 'products.facets.filter_and_operator_subtitle' | t }}
+            </span>
+          {%- endif -%}
+        </div>
+        <facet-remove>
+          <a href='{{ url_to_remove }}' class='facets__reset link underlined-link'>
+            {{ 'products.facets.reset' | t }}
+          </a>
+        </facet-remove>
+      </div>
+    {%- endif -%}
+    <fieldset
+      class='facets-wrap parent-wrap{% if filter_type == 'vertical' %} facets-wrap-vertical{% endif %}'
+    >
+      <legend class='visually-hidden'>{{ label | escape }}</legend>
+      <ul
+        class='{{ visual_layout_class }}{% if is_mobile %} mobile-facets__list{% elsif filter_type == 'vertical' %} facets__list--vertical{% else %} facets__list{% endif %} presentation-{{ presentation }} list-unstyled'
+        role='list'
+      >
+        {% liquid
+          assign v_index = 1
+          assign value_label = 'Cushioning'
+          assign value_active = false
+          assign info_left_value = 'hard'
+          assign info_right_value = 'bounce'
+        %}
+
+        {% render 'facets-range',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index,
+          info_left_value: info_left_value,
+          info_right_value: info_right_value
+        %}
+
+        {% liquid
+          assign v_index = 2
+          assign value_label = 'Support'
+          assign info_left_value = 'stable'
+          assign info_right_value = 'flexible'
+        %}
+
+        {% render 'facets-range',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index,
+          info_left_value: info_left_value,
+          info_right_value: info_right_value
+        %}
+
+        {% liquid
+          assign v_index = 3
+          assign value_label = 'Traction'
+          assign info_left_value = 'grip'
+          assign info_right_value = 'movement'
+        %}
+
+        {% render 'facets-range',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          info_left_value: info_left_value,
+          info_right_value: info_right_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index,
+          info_left_value: info_left_value,
+          info_right_value: info_right_value
+        %}
+
+        {% liquid
+          assign v_index = 4
+          assign value_label = 'Breathability'
+          assign info_left_value = 'study'
+          assign info_right_value = 'airflow'
+        %}
+
+        {% render 'facets-range',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index,
+          info_left_value: info_left_value,
+          info_right_value: info_right_value
+        %}
+
+        {% liquid
+          assign v_index = 5
+          assign value_label = 'Protection'
+          assign info_left_value = 'light'
+          assign info_right_value = 'heavy'
+        %}
+
+        {% render 'facets-range',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index,
+          info_left_value: info_left_value,
+          info_right_value: info_right_value
+        %}
+      </ul>
+    </fieldset>
+  </div>
+</div>
+
+{% liquid
+  assign visual_layout_class = 'facets-layout facets-layout-list facets-layout-list--text'
+
+  assign index = 5
+  assign param_name = 'activity'
+  assign label = 'Activity'
+  assign presentation = 'text'
+%}
+
+<div
+  id='Details-{% if is_mobile %}-Mobile{% endif %}{{ param_name | escape }}-{{ section.id }}'
+  class='{% if is_mobile %}mobile-facets__details page-width{% elsif filter_type == 'horizontal' %}disclosure-has-popup facets__disclosure{% else %} facets__disclosure-vertical{% endif %} js-filter'
+  data-index='{% if is_mobile %}mobile-{% endif %}{{ index }}'
+>
+  <div
+    class='{% if is_mobile %}mobile-{% endif %}facets__summary focus-offset'
+  >
+    <span class='facets__summary-label font-secondary mono-lg md-mono-sm'>
+      {{- label | escape }}
+    </span>
+    <button
+      class='mobile-facets__accordion-button ignore-close medium-hide large-up-hide'
+      aria-expanded='false'
+      aria-controls='FacetMobile-{{ index }}-{{ section.id }}'
+    >
+      {{ 'icon-accordion-expanded.svg' | inline_asset_content }}
+      {{ 'icon-accordion-collapsed.svg' | inline_asset_content }}
+    </button>
+  </div>
+  <div
+    id='Facet{% if is_mobile %}Mobile{% endif %}-{{ index }}-{{ section.id }}'
+    class='{% if is_mobile %}mobile-facets__accordion-content gradient{% else %}parent-display {% if filter_type == 'horizontal' %}facets__display{% else %}facets__display-vertical{% endif %}{% endif %}'
+    {% if is_mobile %}
+      hidden
+    {% endif %}
+  >
+    {%- if is_mobile == false and filter_type != 'vertical' -%}
+      <div class='facets__header'>
+        <div>
+          <span class='facets__selected'>
+            {{- 'products.facets.filters_selected' | t: count: active_values_size -}}
+          </span>
+          {%- if operator == 'AND' -%}
+            <span class='facets__and-helptext'>
+              {{ 'products.facets.filter_and_operator_subtitle' | t }}
+            </span>
+          {%- endif -%}
+        </div>
+        <facet-remove>
+          <a href='{{ url_to_remove }}' class='facets__reset link underlined-link'>
+            {{ 'products.facets.reset' | t }}
+          </a>
+        </facet-remove>
+      </div>
+    {%- endif -%}
+    <fieldset
+      class='facets-wrap parent-wrap{% if filter_type == 'vertical' %} facets-wrap-vertical{% endif %}'
+    >
+      <legend class='visually-hidden'>{{ label | escape }}</legend>
+      <ul
+        class='{{ visual_layout_class }}{% if is_mobile %} mobile-facets__list{% elsif filter_type == 'vertical' %} facets__list--vertical{% else %} facets__list{% endif %} presentation-{{ presentation }} list-unstyled'
+        role='list'
+      >
+        {% liquid
+          assign v_index = 1
+          assign value_label = 'Training'
+          assign value_value = 'training'
+          assign value_active = false
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 2
+          assign value_label = 'Running'
+          assign value_value = 'running'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 3
+          assign value_label = 'Golf'
+          assign value_value = 'gold'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 4
+          assign value_label = 'Lifestyle'
+          assign value_value = 'lifestyle'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+      </ul>
+    </fieldset>
+  </div>
+</div>
+
+{% liquid
+  assign visual_layout_class = 'facets-layout facets-layout-list facets-layout-list--text'
+
+  assign index = 6
+  assign param_name = 'silhouette'
+  assign label = 'Silhouette'
+  assign presentation = 'text'
+%}
+
+<div
+  id='Details-{% if is_mobile %}-Mobile{% endif %}{{ param_name | escape }}-{{ section.id }}'
+  class='{% if is_mobile %}mobile-facets__details page-width{% elsif filter_type == 'horizontal' %}disclosure-has-popup facets__disclosure{% else %} facets__disclosure-vertical{% endif %} js-filter'
+  data-index='{% if is_mobile %}mobile-{% endif %}{{ index }}'
+>
+  <div
+    class='{% if is_mobile %}mobile-{% endif %}facets__summary focus-offset'
+  >
+    <span class='facets__summary-label font-secondary mono-lg md-mono-sm'>
+      {{- label | escape }}
+    </span>
+    <button
+      class='mobile-facets__accordion-button ignore-close medium-hide large-up-hide'
+      aria-expanded='false'
+      aria-controls='FacetMobile-{{ index }}-{{ section.id }}'
+    >
+      {{ 'icon-accordion-expanded.svg' | inline_asset_content }}
+      {{ 'icon-accordion-collapsed.svg' | inline_asset_content }}
+    </button>
+  </div>
+  <div
+    id='Facet{% if is_mobile %}Mobile{% endif %}-{{ index }}-{{ section.id }}'
+    class='{% if is_mobile %}mobile-facets__accordion-content gradient{% else %}parent-display {% if filter_type == 'horizontal' %}facets__display{% else %}facets__display-vertical{% endif %}{% endif %}'
+    {% if is_mobile %}
+      hidden
+    {% endif %}
+  >
+    {%- if is_mobile == false and filter_type != 'vertical' -%}
+      <div class='facets__header'>
+        <div>
+          <span class='facets__selected'>
+            {{- 'products.facets.filters_selected' | t: count: active_values_size -}}
+          </span>
+          {%- if operator == 'AND' -%}
+            <span class='facets__and-helptext'>
+              {{ 'products.facets.filter_and_operator_subtitle' | t }}
+            </span>
+          {%- endif -%}
+        </div>
+        <facet-remove>
+          <a href='{{ url_to_remove }}' class='facets__reset link underlined-link'>
+            {{ 'products.facets.reset' | t }}
+          </a>
+        </facet-remove>
+      </div>
+    {%- endif -%}
+    <fieldset
+      class='facets-wrap parent-wrap{% if filter_type == 'vertical' %} facets-wrap-vertical{% endif %}'
+    >
+      <legend class='visually-hidden'>{{ label | escape }}</legend>
+      <ul
+        class='{{ visual_layout_class }}{% if is_mobile %} mobile-facets__list{% elsif filter_type == 'vertical' %} facets__list--vertical{% else %} facets__list{% endif %} presentation-{{ presentation }} list-unstyled'
+        role='list'
+      >
+        {% liquid
+          assign v_index = 1
+          assign value_label = 'High'
+          assign value_value = 'high'
+          assign value_active = false
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 2
+          assign value_label = 'Mid'
+          assign value_value = 'mid'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 3
+          assign value_label = 'Low'
+          assign value_value = 'low'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+      </ul>
+    </fieldset>
+  </div>
+</div>
+
+{% liquid
+  assign visual_layout_class = 'facets-layout facets-layout-list facets-layout-list--text'
+
+  assign index = 6
+  assign param_name = 'outersole'
+  assign label = 'Outersole'
+  assign presentation = 'text'
+%}
+
+<div
+  id='Details-{% if is_mobile %}-Mobile{% endif %}{{ param_name | escape }}-{{ section.id }}'
+  class='{% if is_mobile %}mobile-facets__details page-width{% elsif filter_type == 'horizontal' %}disclosure-has-popup facets__disclosure{% else %} facets__disclosure-vertical{% endif %} js-filter'
+  data-index='{% if is_mobile %}mobile-{% endif %}{{ index }}'
+>
+  <div
+    class='{% if is_mobile %}mobile-{% endif %}facets__summary focus-offset'
+  >
+    <span class='facets__summary-label font-secondary mono-lg md-mono-sm'>
+      {{- label | escape }}
+    </span>
+    <button
+      class='mobile-facets__accordion-button ignore-close medium-hide large-up-hide'
+      aria-expanded='false'
+      aria-controls='FacetMobile-{{ index }}-{{ section.id }}'
+    >
+      {{ 'icon-accordion-expanded.svg' | inline_asset_content }}
+      {{ 'icon-accordion-collapsed.svg' | inline_asset_content }}
+    </button>
+  </div>
+  <div
+    id='Facet{% if is_mobile %}Mobile{% endif %}-{{ index }}-{{ section.id }}'
+    class='{% if is_mobile %}mobile-facets__accordion-content gradient{% else %}parent-display {% if filter_type == 'horizontal' %}facets__display{% else %}facets__display-vertical{% endif %}{% endif %}'
+    {% if is_mobile %}
+      hidden
+    {% endif %}
+  >
+    {%- if is_mobile == false and filter_type != 'vertical' -%}
+      <div class='facets__header'>
+        <div>
+          <span class='facets__selected'>
+            {{- 'products.facets.filters_selected' | t: count: active_values_size -}}
+          </span>
+          {%- if operator == 'AND' -%}
+            <span class='facets__and-helptext'>
+              {{ 'products.facets.filter_and_operator_subtitle' | t }}
+            </span>
+          {%- endif -%}
+        </div>
+        <facet-remove>
+          <a href='{{ url_to_remove }}' class='facets__reset link underlined-link'>
+            {{ 'products.facets.reset' | t }}
+          </a>
+        </facet-remove>
+      </div>
+    {%- endif -%}
+    <fieldset
+      class='facets-wrap parent-wrap{% if filter_type == 'vertical' %} facets-wrap-vertical{% endif %}'
+    >
+      <legend class='visually-hidden'>{{ label | escape }}</legend>
+      <ul
+        class='{{ visual_layout_class }}{% if is_mobile %} mobile-facets__list{% elsif filter_type == 'vertical' %} facets__list--vertical{% else %} facets__list{% endif %} presentation-{{ presentation }} list-unstyled'
+        role='list'
+      >
+        {% liquid
+          assign v_index = 1
+          assign value_label = 'Standard'
+          assign value_value = 'standard'
+          assign value_active = false
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+
+        {% liquid
+          assign v_index = 2
+          assign value_label = 'Gum'
+          assign value_value = 'gum'
+        %}
+
+        {% render 'facets-checkbox',
+          is_mobile: is_mobile,
+          value_active: value_active,
+          value_label: value_label,
+          presentation: presentation,
+          param_name: param_name,
+          value: value_value,
+          value_active: value_active,
+          value_swatch: value_swatch,
+          is_disabled: is_disabled,
+          index: v_index
+        %}
+      </ul>
+    </fieldset>
+  </div>
+</div>

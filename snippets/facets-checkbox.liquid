@@ -1,0 +1,73 @@
+{% liquid
+  if is_mobile
+    assign input_id = 'Filter-' | append: param_name | escape | append: '-mobile-' | append: index
+  else
+    assign input_id = 'Filter-' | append: param_name | escape | append: '-' | append: index
+  endif
+%}
+{%- capture label_class -%}
+facets__label {% if is_mobile %}mobile-facets__label{% else %}facet-checkbox{% endif %}{% if is_disabled %} disabled{% endif %}{% if value_active %} active{% endif %}
+{%- endcapture -%}
+
+{%- capture text_value -%}
+    <span class="facet-checkbox__text">
+        <span class="facet-checkbox__text-label {% if presentation == 'square' %}font-secondary mono-md md-mono-sm{% else %}font-primary subtitle-sm md-heading-2-sm{% endif %}">{{- value_label | escape }}</span>
+    </span>
+{%- endcapture -%}
+
+<li class='list-menu__item {% if is_mobile %}mobile-facets__item{% else %}facets__item{% endif %}'>
+  {%- if presentation == 'swatch' -%}
+    {%- if is_mobile -%}
+      {%- assign product_form_id = 'FacetFiltersFormMobile' -%}
+    {%- else -%}
+      {%- assign product_form_id = 'FacetFiltersForm' -%}
+    {%- endif -%}
+
+    <div class='{{ label_class }}'>
+      <div class='swatch-input-wrapper font-primary body-md'>
+        {% render 'swatch-input',
+          id: input_id,
+          type: 'checkbox',
+          name: param_name,
+          value: value,
+          product_form_id: product_form_id,
+          swatch: value_swatch,
+          checked: value_active,
+          disabled: is_disabled
+        %}
+      </div>
+
+      {{ text_value }}
+    </div>
+  {%- else -%}
+    <label for='{{ input_id }}' class='{{ label_class }}'>
+      <input
+        class='{% if is_mobile %}mobile-facets__checkbox{% endif %}'
+        type='checkbox'
+        name='{{ param_name }}'
+        value='{{ value }}'
+        id='{{ input_id }}'
+        {% if value_active %}
+          checked
+        {% endif %}
+        {% if is_disabled %}
+          disabled
+        {% endif %}
+      >
+
+      {%- if presentation == 'image' -%}
+        <div class='facets__image-wrapper'>
+          {%- if value_image -%}
+            {{ value_image | image_url: width: 300 | image_tag: class: 'facets__image', alt: value_alt }}
+          {%- endif -%}
+        </div>
+      {%- else -%}
+        {{ 'facets-checkbox.svg' | inline_asset_content }}
+
+        {{ 'icon-checkmark.svg' | inline_asset_content }}
+      {%- endif -%}
+
+      {{ text_value }}
+    </label>
+  {%- endif -%}
+</li>

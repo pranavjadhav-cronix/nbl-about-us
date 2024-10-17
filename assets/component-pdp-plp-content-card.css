@@ -1,0 +1,272 @@
+.pdp-plp-content-card {
+  border-bottom: solid 1px var(--color-black-2);
+
+  .pdp-plp-content-card-content {
+    .pdp-plp-content-card-header-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 1.6rem;
+      padding-left: 0.8rem;
+      padding-right: 0.8rem;
+      margin-bottom: 2.4rem;
+
+      @media screen and (max-width: 749px) {
+        flex-direction: column;
+        overflow-x: auto;
+      }
+
+      @media screen and (min-width: 1280px) {
+        padding: 0;
+        margin-bottom: 3.2rem;
+      }
+
+      .pdp-plp-content-card-header > * {
+        margin: 0;
+      }
+
+      .pdp-plp-content-card-tabs {
+        display: flex;
+        column-gap: 2.4rem;
+      }
+    }
+
+    .pdp-plp-content-card-tabpanel {
+      &:not([hidden]) {
+        display: flex;
+      }
+
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      column-gap: 1.6rem;
+
+      @media screen and (min-width: 1280px) {
+        column-gap: 2.4rem;
+      }
+
+      li {
+        flex: auto 1 1;
+
+        @media screen and (min-width: 750px) {
+          row-gap: 2.4rem;
+          max-width: calc(50% - 0.8rem);
+        }
+
+        @media screen and (min-width: 1280px) {
+          row-gap: 3.2rem;
+          max-width: calc(50% - 1.2rem);
+        }
+
+        a {
+          display: flex;
+          flex-direction: column;
+          row-gap: 1.6rem;
+          text-decoration: none;
+          height: 100%;
+
+          .pdp-plp-content-card-tabpanel-image {
+            position: relative;
+
+            img,
+            svg {
+              aspect-ratio: 3 / 4;
+              width: 100%;
+              height: auto;
+              transition: opacity 0.4s;
+
+              @media screen and (min-width: 750px) {
+                aspect-ratio: 1 / 1;
+              }
+
+              &.media-fit-cover {
+                object-fit: cover;
+              }
+
+              &.media-fit-contain {
+                object-fit: contain;
+              }
+
+              &.hover-image {
+                position: absolute;
+                top: 0;
+                left: 0;
+                opacity: 0;
+              }
+            }
+
+            &:hover:has(.hover-image) {
+              .hover-image {
+                opacity: 1;
+              }
+
+              img:not(.hover-image) {
+                opacity: 0;
+              }
+            }
+
+            span[class^='product-tag-'] {
+              position: absolute;
+              top: 0.8rem;
+              right: 0.8rem;
+
+              @media screen and (min-width: 750px) {
+                top: 1.2rem;
+                right: 1.2rem;
+              }
+
+              @media screen and (min-width: 1280px) {
+                top: 1.6rem;
+                right: 1.6rem;
+              }
+            }
+          }
+
+          .pdp-plp-content-card-tabpanel-text {
+            h3,
+            p {
+              margin: 0;
+            }
+
+            & > * {
+              &:not(:first-child) {
+                padding-top: 0.8rem;
+                border-top: solid 1px rgb(var(--color-foreground));
+
+                @media screen and (min-width: 750px) {
+                  padding-top: 1.2rem;
+                }
+              }
+
+              &:not(:last-child) {
+                padding-bottom: 0.8rem;
+
+                @media screen and (min-width: 750px) {
+                  padding-bottom: 1.2rem;
+                }
+              }
+            }
+
+            .pdp-plp-content-card-tabpanel-description-container {
+              display: flex;
+              flex-direction: column;
+              row-gap: 1.2rem;
+
+              @media screen and (min-width: 750px) {
+                flex-direction: row;
+                justify-content: space-between;
+                column-gap: 4.8rem;
+              }
+
+              .pdp-plp-content-card-tabpanel-description:empty {
+                display: initial;
+              }
+
+              .price {
+                min-width: fit-content;
+
+                &.price--on-sale .price__sale,
+                &:not(.price--on-sale) .price__regular {
+                  display: flex;
+                  flex-direction: row-reverse;
+                  align-items: center;
+                  column-gap: 0.8rem;
+                }
+
+                .price-item {
+                  margin: 0;
+                }
+
+                s.price-item--regular {
+                  vertical-align: middle;
+                }
+
+                .unit-price {
+                  display: none;
+                }
+              }
+            }
+          }
+
+          .button {
+            margin-top: auto;
+
+            @media screen and (min-width: 1280px) {
+              width: fit-content;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.pdp-plp-content-card {
+  * {
+    font-family: var(--primary-font);
+    font-weight: 500;
+  }
+
+  .pdp-plp-content-card-header {
+    h2 {
+      font-weight: 500;
+      font-size: 2.8rem;
+      line-height: 1.07;
+      letter-spacing: -0.56px;
+
+      @media screen and (min-width: 1280px) {
+        font-size: 3.6rem;
+        line-height: 1.05;
+        letter-spacing: -0.72px;
+      }
+    }
+  }
+
+  .pdp-plp-content-card-tabpanel {
+    h3 {
+      font-size: 1.4rem;
+      font-weight: 500;
+      line-height: 1.28;
+
+      @media screen and (min-width: 1280px) {
+        font-size: 2.4rem;
+        line-height: 1.16;
+        letter-spacing: -0.48px;
+      }
+    }
+
+    .pdp-plp-content-card-tabpanel-description,
+    .pdp-plp-content-card-tabpanel-description > * {
+      font-family: var(--primary-font);
+      font-weight: normal;
+
+      color: rgb(var(--color-foreground));
+      font-size: 1.4rem;
+      line-height: 1.28;
+
+      @media screen and (min-width: 1280px) {
+        font-size: 2rem;
+        line-height: 1.2;
+      }
+    }
+
+    .price {
+      .price-item--regular,
+      .price-item--sale {
+        font-family: var(--secondary-font);
+        font-size: 2rem;
+        font-weight: 300;
+        line-height: 1;
+        letter-spacing: 0.96px;
+        color: rgb(var(--color-foreground));
+
+        @media screen and (min-width: 1280px) {
+          font-size: 2.4rem;
+        }
+      }
+
+      &.price--on-sale .price-item--regular {
+        color: var(--color-gray-1);
+      }
+    }
+  }
+}

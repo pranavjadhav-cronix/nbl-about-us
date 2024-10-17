@@ -1,0 +1,340 @@
+{{ 'component-pdp-plp-content-card.css' | asset_url | stylesheet_tag }}
+<script src='{{ 'tab-navigation.js' | asset_url }}' defer='defer'></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    setUpTabNavigation('#PDP-PLP-Content-Card-{{ section.id }}');
+  });
+</script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- assign cards = section.blocks | where: 'type', 'card' | map: 'settings' -%}
+
+<div
+  id='PDP-PLP-Content-Card-{{ section.id }}'
+  class='pdp-plp-content-card section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}'
+>
+  <div class='pdp-plp-content-card-content page-width'>
+    <div class='pdp-plp-content-card-header-container'>
+      <div class='pdp-plp-content-card-header'>
+        {%- if section.settings.title != empty -%}
+          <h2>
+            {{- section.settings.title -}}
+          </h2>
+        {%- endif -%}
+      </div>
+
+      <div class='pdp-plp-content-card-tabs' role='tablist'>
+        {%- assign tab_names = cards | map: 'tab_name' | uniq -%}
+
+        {%- for tab_name in tab_names -%}
+          <button
+            id='section-{{ section.id }}-tab-{{ forloop.index }}'
+            class='tab-button font-primary nav'
+            role='tab'
+            aria-controls='section-{{ section.id }}-tabpanel-{{ forloop.index }}'
+            {% if forloop.first %}
+              aria-selected='true'
+              tabindex='0'
+            {%- else -%}
+              aria-selected='false'
+              tabindex='-1'
+            {% endif %}
+          >
+            {{- tab_name -}}
+          </button>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    {%- for tab_name in tab_names -%}
+      <ul
+        role='list'
+        id='section-{{ section.id }}-tabpanel-{{ forloop.index }}'
+        class='pdp-plp-content-card-tabpanel'
+        {% unless forloop.first %}
+          hidden
+        {% endunless %}
+        aria-labelledby='section-{{ section.id }}-tab-{{ forloop.index }}'
+        tabindex='0'
+      >
+        {%- assign tab_cards = cards | where: 'tab_name', tab_name | where: 'product' -%}
+
+        {%- for card in tab_cards -%}
+          <li role='listitem'>
+            <a href='{{ card.link | default: card.product.url }}'>
+              <div class='pdp-plp-content-card-tabpanel-image'>
+                {% assign featured_image = card.image | default: card.product.featured_image %}
+                {%- if featured_image == null -%}
+                  {{ 'image' | placeholder_svg_tag }}
+                {%- else -%}
+                  {%- assign image_class = 'media-fit-' | append: card.media_fit -%}
+                  {{ featured_image | image_url: width: 700 | image_tag: class: image_class, alt: '' }}
+
+                  {%- assign hover_image = card.hover_image | default: card.product.images[1] -%}
+                  {%- unless hover_image == null -%}
+                    {%- assign hover_image_class = 'media-fit-'
+                      | append: card.hover_media_fit
+                      | append: ' hover-image'
+                    -%}
+                    {{ hover_image | image_url: width: 700 | image_tag: class: hover_image_class, alt: '' }}
+                  {%- endunless -%}
+                {%- endif -%}
+
+                {%- if card.show_custom_tag -%}
+                  {%- render 'product-tag', product_tag: card.tag, product_tag_size: card.tag_size -%}
+                {%- else -%}
+                  {%- render 'product-tag', product: card.product, product_tag_size: card.tag_size -%}
+                {%- endif -%}
+              </div>
+
+              <div class='pdp-plp-content-card-tabpanel-text'>
+                <h3>{{ card.title | default: card.product.title }}</h3>
+                <div class='pdp-plp-content-card-tabpanel-description-container'>
+                  <div class='pdp-plp-content-card-tabpanel-description'>
+                    {{ card.description | default: card.product.description }}
+                  </div>
+
+                  {% render 'price',
+                    product: card.product,
+                    currency_code_enabled: false,
+                    money_without_trailing_zeros: true
+                  %}
+                </div>
+              </div>
+
+              <button
+                class='button'
+                aria-label='{{ card.title | default: card.product.title | escape }} shop now'
+              >
+                Shop now
+              </button>
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.pdp-plp-content-card.name",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.pdp-plp-content-card.settings.header.content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "default": "t:sections.pdp-plp-content-card.settings.title.default",
+      "label": "t:sections.pdp-plp-content-card.settings.title.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 24
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "t:sections.pdp-plp-content-card.blocks.card.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_name",
+          "label": "t:sections.pdp-plp-content-card.blocks.card.settings.tab_name.label"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "t:sections.pdp-plp-content-card.blocks.card.settings.product.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.pdp-plp-content-card.blocks.card.settings.image.label"
+        },
+        {
+          "type": "select",
+          "id": "media_fit",
+          "options": [
+            {
+              "value": "cover",
+              "label": "t:sections.pdp-plp-content-card.blocks.card.settings.media_fit.options__1.label"
+            },
+            {
+              "value": "contain",
+              "label": "t:sections.pdp-plp-content-card.blocks.card.settings.media_fit.options__2.label"
+            }
+          ],
+          "default": "cover",
+          "label": "t:sections.pdp-plp-content-card.blocks.card.settings.media_fit.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "hover_image",
+          "label": "t:sections.pdp-plp-content-card.blocks.card.settings.hover_image.label"
+        },
+        {
+          "type": "select",
+          "id": "hover_media_fit",
+          "options": [
+            {
+              "value": "cover",
+              "label": "t:sections.pdp-plp-content-card.blocks.card.settings.media_fit.options__1.label"
+            },
+            {
+              "value": "contain",
+              "label": "t:sections.pdp-plp-content-card.blocks.card.settings.media_fit.options__2.label"
+            }
+          ],
+          "default": "cover",
+          "label": "t:sections.pdp-plp-content-card.blocks.card.settings.hover_media_fit.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_custom_tag",
+          "label": "t:sections.pdp-plp-content-card.blocks.card.settings.show_custom_tag.label",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "tag",
+          "options": [
+            {
+              "value": "SALE",
+              "label": "t:sections.all.product_tag.options__1.label"
+            },
+            {
+              "value": "NEW",
+              "label": "t:sections.all.product_tag.options__2.label"
+            },
+            {
+              "value": "FINAL SALE",
+              "label": "t:sections.all.product_tag.options__3.label"
+            }
+          ],
+          "default": "SALE",
+          "label": "t:sections.all.product_tag.label"
+        },
+        {
+          "type": "select",
+          "id": "tag_size",
+          "options": [
+            {
+              "value": "large",
+              "label": "t:sections.all.product_tag_size.options__1.label"
+            },
+            {
+              "value": "small",
+              "label": "t:sections.all.product_tag_size.options__2.label"
+            }
+          ],
+          "default": "large",
+          "label": "t:sections.all.product_tag_size.label"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.pdp-plp-content-card.blocks.card.settings.title.label"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "t:sections.pdp-plp-content-card.blocks.card.settings.description.label"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.pdp-plp-content-card.blocks.card.settings.link.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.pdp-plp-content-card.name",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "tab_name": "Tab 1",
+            "title": "Card 1.1",
+            "description": "Description"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "tab_name": "Tab 1",
+            "title": "Card 1.2",
+            "description": "Description"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "tab_name": "Tab 2",
+            "title": "Card 2.1",
+            "description": "Description"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "tab_name": "Tab 2",
+            "title": "Card 2.2",
+            "description": "Description"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

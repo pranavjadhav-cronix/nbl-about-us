@@ -1,0 +1,126 @@
+{{ 'component-three-up-content.css' | asset_url | stylesheet_tag }}
+
+<style>
+  .card-title a,
+  .card-text {
+    color: var(--color-link);
+    text-decoration: none;
+  }
+</style>
+
+<div class='section-three-up-content color-{{ section.settings.color_scheme }}'>
+  <div class='page-width'>
+    <div class='row {% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}'>
+      {% for block in section.blocks %}
+        
+        {%  assign block_card_title = block.settings.card_title %}
+        {%  assign block_card_url = block.settings.card_url %}
+        {%  assign block_card_text = block.settings.card_text %}
+        {%  assign block_card_btn = block.settings.card_btn %}
+
+        
+        <div class='column'>
+            {%- if block.settings.card_img != blank -%}
+
+              {%- if block_card_url != blank -%}
+              <a href='{{ block.settings.card_url }}'>
+              {%- endif -%}
+                {%- assign widths = '165, 360, 535, 750, 1070, 1500' -%}
+                {%- capture sizes -%}
+                          (min-width: {{ settings.page_width }}px) {{ settings.page_width | minus: 100 | divided_by: 2 }}px,
+                          (min-width: 750px) calc((100vw - 130px) / 2), calc((100vw - 50px) / 2)
+                      {%- endcapture -%}
+                {{
+                  block.settings.card_img
+                  | image_url: width: 1500
+                  | image_tag: sizes: sizes, widths: widths, class: 'card-img'
+                }}
+              {%- if block_card_url != blank -%}
+              </a>
+              {%- endif -%}
+           {%- endif -%}
+          {%- if block_card_title != blank -%}
+            <h3 class='card-title'>
+              {%- if block_card_url != blank -%}<a href='{{ block.settings.card_url }}'>{%- endif -%}{{ block.settings.card_title }}{%- if block_card_url != blank -%}</a>{%- endif -%}                      
+            </h3>              
+          {%- endif -%}
+          
+          {%- if block_card_text != blank %}
+            <p class='card-text'>{{ block.settings.card_text }}</p>
+          {%- endif -%}
+          
+          {%- if block_card_btn != blank and block_card_url != blank %}
+            <a href='{{ block.settings.card_url }}' class='button'>{{ block.settings.card_btn }}</a>
+          {%- endif -%}              
+        </div><!-- .column ends -->
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.three-up-content.name",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.multirow.settings.container_color_scheme.label",
+      "default": "scheme-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "card_img",
+          "label": "t:sections.three-up-content.blocks.settings.card-image.settings.card-image.label"
+        },
+        {
+          "type": "text",
+          "id": "card_title",
+          "label": "t:sections.three-up-content.blocks.settings.card_title.settings.card_title.label",
+          "default": "t:sections.three-up-content.blocks.settings.card_title.settings.card_title.default"
+        },
+        {
+          "type": "text",
+          "id": "card_text",
+          "label": "t:sections.three-up-content.blocks.settings.card_text.settings.card_text.label",
+          "default": "t:sections.three-up-content.blocks.settings.card_text.settings.card_text.default"
+        },
+        {
+          "type": "text",
+          "id": "card_btn",
+          "label": "t:sections.three-up-content.blocks.settings.card_btn.settings.card_btn.label",
+          "default": "t:sections.three-up-content.blocks.settings.card_btn.settings.card_btn.default"
+        },
+        {
+          "type": "url",
+          "id": "card_url",
+          "label": "t:sections.three-up-content.blocks.settings.card_url.settings.card_url.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.three-up-content.name",
+      "blocks": [
+        {
+          "type": "card"
+        },
+        {
+          "type": "card"
+        },
+        {
+          "type": "card"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

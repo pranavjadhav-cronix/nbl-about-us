@@ -1,0 +1,40 @@
+{% liquid
+  if product_tag != blank
+    assign tag_type = product_tag
+  elsif product.metafields.badge.text != blank
+    assign tag_type = product.metafields.badge.text
+  elsif product.available
+    assign tag_type = 'SALE'
+  endif
+%}
+
+{%- if tag_type -%}
+  {%- capture product_color -%}
+    {%- case tag_type -%}
+        {%- when 'NEW' -%}
+            green
+        {%- when 'FINAL SALE' -%}
+            gold
+        {%-else -%}
+            white
+    {%- endcase -%}
+  {%- endcapture -%}
+
+  {%- capture t_key -%}
+    {%- case tag_type -%}
+        {%- when 'NEW' -%}
+            new
+        {%- when 'FINAL SALE' -%}
+            final_sale
+        {%- else -%}
+            sale
+    {%- endcase -%}
+  {%- endcapture -%}
+
+  <span
+    class='product-tag-{{ product_color }}{% if product_tag_size == 'small' %} product-tag--small{% endif %}'
+  >
+    {%- assign key = 'products.product_tag.' | append: t_key -%}
+    {{ key | t -}}
+  </span>
+{%- endif -%}

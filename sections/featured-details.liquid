@@ -1,0 +1,41 @@
+{{ 'component-featured-details.css' | asset_url | stylesheet_tag }}
+
+<div class="featured-details__title-wrapper">
+  <h2 class="featured-details__title">Your success is in the details</h2>
+</div>
+<div class="featured-details__main-image-wrapper">
+  <div class="featured-details__main-image">{{ 'image' | placeholder_svg_tag }}</div>
+</div>
+<div class="featured-details__detail-highlight-wrapper">
+  <div class="featured-details__detail-highlight__content">
+    <h3 class="detail-hightlight__title">detail highlight</h3>
+    <div class="detail-hightlight__content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio assumenda quibusdam molestias!</div>
+  </div>
+</div>
+<div class="featured-details__media-wrapper">
+  <div class="featured-details__media-content">
+    <div class="featured-details__media-image">
+      {{ 'image' | placeholder_svg_tag }}
+    </div>
+  </div>
+</div>
+<div class="featured-details__media-text-wrapper">
+  <div class="featured-details__media-text">
+    <h3 class="media-text__title">Solid Fit</h3>
+    <p class="mediat-text__content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex, magnam. Esse alias at exercitationem est quis!</p>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "t:sections.featured-details.name",
+    "class": "featured-details-section",
+    "tag": "section",
+    "settings": [],
+    "presets": [
+      {
+        "name": "t:sections.featured-details.name"
+      }
+    ]
+  }
+{% endschema %}

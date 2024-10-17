@@ -1,0 +1,42 @@
+{% liquid
+  if is_mobile
+    assign input_id = 'Filter-' | append: param_name | escape | append: '-mobile-' | append: index
+  else
+    assign input_id = 'Filter-' | append: param_name | escape | append: '-' | append: index
+  endif
+%}
+{%- capture label_class -%}
+  facets__label{% if is_disabled %} disabled{% endif %}{% if value_active %} active{% endif %}
+  {%- endcapture -%}
+
+{%- capture text_value -%}
+      <span class="facet-range__text">
+          <span class="facet-range__text-label font-primary buttons-sm">{{- value_label | escape }}</span>
+      </span>
+  {%- endcapture -%}
+
+<li class='list-menu__item facet-range__item {% if is_mobile %}mobile-facets__item{% else %}facets__item{% endif %}'>
+  <label for='{{ input_id }}' class='{{ label_class }}'>
+    {{ 'icon-range-background.svg' | inline_asset_content }}
+
+    <input
+      class='{% if is_mobile %}mobile-facets__range{% endif %}'
+      type='range'
+      name='{{ param_name }}'
+      value='{{ value | default: 0 }}'
+      id='{{ input_id }}'
+      min='-1'
+      max='1'
+      step='1'
+      {% if is_disabled %}
+        disabled
+      {% endif %}
+    >
+    {{ text_value }}
+  </label>
+
+  <div class='facet-range__info-values font-secondary mono-sm'>
+    <span>{{ info_left_value }}</span>
+    <span>{{ info_right_value }}</span>
+  </div>
+</li>

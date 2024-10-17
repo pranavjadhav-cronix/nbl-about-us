@@ -1,0 +1,16 @@
+{% if settings.zendesk_key != blank %}
+{% unless template.name == 'index' or template.name == 'Virtual Retail' %}
+  <script id='ze-snippet' src='https://static.zdassets.com/ekr/snippet.js?key={{ settings.zendesk_key }}' defer='defer'></script>
+  <script type='text/javascript'>
+    window.zESettings = {
+      webWidget: {
+        chat: {
+          departments: {
+            enabled: [],
+          },
+        },
+      },
+    };
+  </script>
+{% endunless %}
+{% endif %}

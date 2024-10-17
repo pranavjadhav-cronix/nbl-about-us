@@ -1,0 +1,83 @@
+.promo-bar.announcement-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  padding: 0;
+  position: relative;
+}
+.promo-bar .marquee-main {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
+}
+.promo-bar .marquee {
+  white-space: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-duration: 15s;
+  width: max-content;
+  animation-name: marquee-left;
+}
+@keyframes marquee-left {
+  0% {
+    transform: translate3d(0, 0, 0);
+    visibility: visible;
+  }
+  100% {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+.marquee .heading {
+  margin: 0 0;
+  padding: 0 2.4rem 0 4rem;
+  line-height: normal;
+  font-family: var(--primary-font);
+  font-weight: 500;
+  position: relative;
+}
+.marquee .heading a {
+  text-underline-offset: 2px;
+}
+.marquee .heading:before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  display: block;
+  background-color: #c0eab4;
+  position: absolute;
+  left: 2.4rem;
+  top: 50%;
+  transform: translatey(-50%);
+}
+
+.promo-bar .promo-bar-control {
+  border: none;
+  padding: 0.4rem 0.4rem;
+  z-index: 1;
+}
+
+.promo-bar .promo-bar-control-icon {
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s;
+  font-size: 0;
+  line-height: normal;
+  width: 24px;
+  height: 24px;
+  font-size: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+@media screen and (min-width: 1280px) {
+  .promo-bar .promo-bar-control {
+    padding: 0.4rem 0.8rem;
+  }
+}

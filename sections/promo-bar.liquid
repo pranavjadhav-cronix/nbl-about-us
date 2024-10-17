@@ -1,0 +1,263 @@
+{%- liquid
+  if section.settings.enable_country_selector
+    assign language_country_selector = true
+  endif
+  if section.blocks.size > 0
+    assign announcement_bar = true
+  endif
+-%}
+{% if announcement_bar %}
+{{ 'promo-bar.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'promo-bar.js' | asset_url }}" defer="defer"></script>
+
+<style>
+  .promo-bar.announcement-bar {
+      background-color:{{ section.settings.background_color }};
+      color: {{ section.settings.text_color }};
+      border-bottom: 1px solid {{ section.settings.text_color }};
+  }
+  .promo-bar .marquee{
+      animation-duration: {{ section.settings.marquee_speed | times: section.blocks.size }}s;
+  }
+  .marquee .heading {
+      font-size:{{ section.settings.mobile_font_size }}px;
+      color: {{ section.settings.text_color }};
+  }
+  .marquee .heading a {
+    color: {{ section.settings.text_color }};
+  }
+
+  @media screen and (min-width: 750px) {
+    .marquee .heading {
+      font-size:{{ section.settings.desktop_font_size }}px;
+    }
+  }
+
+  .promo-bar .promo-bar-control {
+      background-color: {{ section.settings.background_color }};
+      color: {{ section.settings.text_color }};
+      border-left: 1px solid {{ section.settings.text_color }};
+      border-right: 0px solid {{ section.settings.text_color }};
+  }
+
+  .promo-bar .promo-bar-control .promo-bar-control-icon {
+    background-color: {{ section.settings.background_color }};
+  }
+
+  .promo-bar .promo-bar-control .promo-bar-control-icon svg > * {
+    fill: {{ section.settings.text_color }};
+  }
+
+  .country-model-button{
+    background-color: {{ section.settings.background_color }};
+    color: {{ section.settings.text_color }};
+  }
+
+  @media screen and (min-width: 1280px) {
+    .promo-bar .promo-bar-control {
+        border-right: 1px solid {{ section.settings.text_color }};
+    }
+  }
+
+</style>
+
+<promo-bar class="promo-bar announcement-bar" role="region" aria-label="Promotional Announcements">
+  <div class="marquee-main">
+    <div class="marquee" aria-live="polite" aria-atomic="true">
+      {% for block in section.blocks %}
+        {% if block.settings.heading != blank %}
+          <p class="heading">
+            {{ block.settings.heading }}
+            {% if block.settings.link != blank and block.settings.text != blank %}
+              <span>
+                <a target="_blank" href="{{ block.settings.link }}" aria-label="Learn more about {{ block.settings.heading }} - {{ block.settings.text }}">
+                  {{ block.settings.text }}
+                </a>
+              </span>
+            {% endif %}
+          </p>
+        {% endif %}
+      {% endfor %}
+    </div>    
+    {% for i in (1..5) %}
+      <div class="marquee">
+        {% for block in section.blocks %}
+          {% if block.settings.heading != blank %}
+            <p class="heading">
+              {{ block.settings.heading }}
+              {% if block.settings.link != blank and block.settings.text != blank %}
+                <span>
+                  <a target="_blank" href="{{ block.settings.link }}" 
+                    aria-label="Learn more about {{ block.settings.heading }} - {{ block.settings.text }}">
+                    {{ block.settings.text }}
+                  </a>
+                </span>
+              {% endif %}
+            </p>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+  <div class="promo-bar-control">
+    <button class="promo-bar-control-icon promo-bar-pause-icon" 
+            aria-label="Pause the promo bar" 
+            aria-pressed="false" 
+            id="pauseButton">
+      {%- render 'icon-pause-custom' -%}
+    </button>
+    <button class="promo-bar-control-icon promo-bar-play-icon hidden" 
+            aria-label="Play the promo bar" 
+            aria-pressed="true" 
+            id="playButton">
+      {%- render 'icon-play-custom' -%}
+    </button>
+  </div>
+  {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
+    <div class="localization-wrapper">
+      <button class="country-model-button small-hide medium-hide " aria-label="currency-{{ localization.country.iso_code | downcase }}" aria-haspopup="dialog" aria-expanded="false" aria-controls="countrySelectorModal">
+        {% render 'icon-world-custom' %}
+        {{ localization.country.currency.iso_code }}
+        <span class="visually-hidden">Open country selector</span>
+      </button>
+      <div class="model-country-selector" role="dialog" aria-labelledby="countrySelectorTitle" id="countrySelectorModal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button class="close" aria-label="Close modal">
+              {% render 'icon-close-custom' %}
+            </button>
+          </div>
+          {% if settings.currency_heading != blank %}<h2 id="countrySelectorTitle" class="country-selector-title">{{ settings.currency_heading }}</h2>{% endif %}
+            <form accept-charset="UTF-8" class="localization-form" enctype="multipart/form-data" aria-labelledby="country">
+            <div class="country-select">
+              <div class="select">
+                {%- if settings.show_flag -%}
+                  <span class="country-selector-flag country-{{ localization.country.iso_code | downcase }}">{% render 'icon-flag', flag: localization.country.iso_code  %}</span>
+                {%- endif -%}
+                <select name="country" id="countrySelector" class="country-selector" aria-required="true">
+                  {%- for country in localization.available_countries -%}
+                    <option value="{{ country.iso_code }}"{% if localization.country.iso_code == country.iso_code %}selected{% endif %}>
+                      {{ country.name }} ({{ country.currency.iso_code }})
+                    </option>
+                  {%- endfor -%}
+                </select>
+                {% render 'icon-down-caret' %}
+              </div>
+              {% if settings.currency_text != blank %}<p class="text">{{ settings.currency_text }}</p>{% endif %}
+            </div>
+            {% if settings.button_text != blank %}
+              <button class="button button--primary" aria-label="{{ settings.button_text }}" type="submit">{{ settings.button_text }}</button>
+            {% endif %}
+          </form>
+          
+        </div>
+      </div>
+    </div>
+  {% endif %}
+</promo-bar>
+
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Promo bar",
+    "tag": "section",
+    "class": "main-promo-bar",
+    "enabled_on": {
+      "groups": ["header"]
+    },
+    "settings": [
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color",
+        "default": "#000"
+      },
+      {
+        "type": "color",
+        "id": "text_color",
+        "label": "Text color",
+        "default": "#fff"
+      },
+      {
+        "type": "range",
+        "id": "marquee_speed",
+        "max": 100,
+        "min": 5,
+        "step": 5,
+        "default": 30,
+        "label": "Marquee speed"
+      },
+      {
+        "type": "range",
+        "id": "desktop_font_size",
+        "max": 100,
+        "min": 10,
+        "default": 20,
+        "unit": "px",
+        "step": 2,
+        "label": "Desktop font size"
+      },
+      {
+        "type": "range",
+        "id": "mobile_font_size",
+        "max": 100,
+        "min": 10,
+        "default": 20,
+        "unit": "px",
+        "step": 2,
+        "label": "Mobile font size"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.announcement-bar.settings.header__2.content"
+      },
+      {
+        "type": "header",
+        "content": "t:sections.announcement-bar.settings.header__3.content",
+        "info": "t:sections.announcement-bar.settings.header__3.info"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_country_selector",
+        "default": false,
+        "label": "t:sections.announcement-bar.settings.enable_country_selector.label"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "promo_bar",
+        "name": "Promo bar",
+        "settings": [
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading"
+          },
+          {
+            "type": "text",
+            "id": "text",
+            "default": "t:sections.announcement-bar.blocks.announcement.settings.text.default",
+            "label": "t:sections.announcement-bar.blocks.announcement.settings.text.label"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "t:sections.announcement-bar.blocks.announcement.settings.link.label"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Promo bar",
+        "blocks": [
+          {
+            "type": "promo_bar"
+          }
+        ]
+      }
+    ]
+  }
+  {% endschema %}
+  

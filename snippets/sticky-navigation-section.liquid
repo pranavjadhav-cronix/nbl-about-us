@@ -1,0 +1,54 @@
+{{ 'sticky-navigation-section.css' | asset_url | stylesheet_tag }}
+<script src='{{ 'sticky-navigation-section.js' | asset_url }}' defer='defer'></script>
+
+<section
+  class='sticky-navigation-section color-{{ color_scheme }}'
+  data-sticky-nav
+  aria-labelledby='{{ product.title }}'
+  role='region'
+>
+  <div class='sticky-nav-flex page-width'>
+    <div class='sticky-nav-left'>
+      <h2 id='product-title' class='product-title'>{{ product.title }}</h2>
+      <div class='sticky-price-main' id='price-{{ section.id }}' role='status' aria-live='polite'>
+        {%- render 'price', product: product, use_variant: true, show_badges: false, price_class: 'price--large' -%}
+      </div>
+    </div>
+    <div class='sticky-nav-right'>
+      {%- if sticky_add_to_cart -%}
+        <button
+          class='button button--full-width button--primary sticky-add-to-cart'
+          aria-label='
+            {%- if product.selected_or_first_available_variant == nil -%}
+              {{ 'products.product.unavailable' | t }}
+            {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
+              {{ 'products.product.sold_out' | t }}
+            {%- else -%}
+              {{ 'products.product.add_to_cart' | t }}
+            {%- endif -%}
+          '
+          aria-haspopup='dialog'
+        >
+          <span>
+            {%- if product.selected_or_first_available_variant == null -%}
+              {{ 'products.product.unavailable' | t }}
+            {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
+              {{ 'products.product.sold_out' | t }}
+            {%- else -%}
+              {{ 'products.product.add_to_cart' | t }}
+            {%- endif -%}
+          </span>
+          {%- render 'loading-spinner' -%}
+        </button>
+      {%- else -%}
+        <button
+          class='sticky-select-size-btn button button--primary button--active'
+          data-select-size-btn
+          aria-label='{{ 'products.product.select_your_size' | t }}'
+        >
+          <span> {{ 'products.product.select_your_size' | t }}</span>
+        </button>
+      {%- endif -%}
+    </div>
+  </div>
+</section>

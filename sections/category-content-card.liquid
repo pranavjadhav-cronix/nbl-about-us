@@ -1,0 +1,292 @@
+{{ 'component-category-content-card.css' | asset_url | stylesheet_tag }}
+<script src='{{ 'component-category-content-card.js' | asset_url }}' defer='defer'></script>
+<script src='{{ 'tab-navigation.js' | asset_url }}' defer='defer'></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    setUpTabNavigation('#Category-Content-Card-{{ section.id }}');
+  });
+</script>
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+{%- assign cards = section.blocks | where: 'type', 'card' | map: 'settings' -%}
+
+<div
+  id='Category-Content-Card-{{ section.id }}'
+  class='category-content-card section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}'
+>
+  <div class='category-content-card-content page-width'>
+    <div class='category-content-card-header-container'>
+      <div class='category-content-card-header'>
+        {%- if section.settings.heading_title != empty -%}
+          <h2>
+            {{- section.settings.heading_title -}}
+          </h2>
+        {%- endif -%}
+
+        {%- if section.settings.heading_description != empty -%}
+          <p>
+            {{- section.settings.heading_description -}}
+          </p>
+        {%- endif -%}
+      </div>
+
+      <div class='category-content-card-tabs' role='tablist' aria-label='Product Categories'>
+        {%- assign tab_names = cards | map: 'tab_name' | uniq -%}
+
+        {%- for tab_name in tab_names -%}
+          <button
+            id='section-{{ section.id }}-tab-{{ forloop.index }}'
+            class='tab-button font-primary nav'
+            role='tab'
+            aria-controls='section-{{ section.id }}-tabpanel-{{ forloop.index }}'
+            {% if forloop.first %}
+              aria-selected='true'
+              tabindex
+            {%- else -%}
+              aria-selected='false'
+              tabindex='-1'
+            {% endif %}
+          >
+            {{- tab_name -}}
+          </button>
+        {%- endfor -%}
+      </div>
+    </div>
+
+    {%- for tab_name in tab_names -%}
+      <div
+        id='section-{{ section.id }}-tabpanel-{{ forloop.index }}'
+        class='category-content-card-cards'
+        {% unless forloop.first %}
+          hidden
+        {% endunless %}
+        role='tabpanel'
+        aria-labelledby='section-{{ section.id }}-tab-{{ forloop.index }}'
+        tabindex='0'
+      >
+        <ol>
+          {%- assign category_cards = cards | where: 'tab_name', tab_name -%}
+
+          {%- for card in category_cards -%}
+            <li class='color-{{ section.settings.cards_color_scheme | default: section.settings.color_scheme }}'>
+              <a href='{{ card.settings.link }}' aria-label='{{ card.description }}'>
+                <div class='category-content-card-cards-header'>
+                  <h3>{{ card.title }}</h3>
+                  <span class='category-content-card-cards-counter'></span>
+                </div>
+                <div class='category-content-card-cards-image'>
+                  {%- if card.image == null -%}
+                    {{ 'image' | placeholder_svg_tag }}
+                  {%- else -%}
+                    {%- assign image_class = 'media-fit-' | append: card.media_fit -%}
+                    {{ card.image | image_url: width: 300 | image_tag: class: image_class }}
+                  {%- endif -%}
+                </div>
+                <p>{{ card.description }}</p>
+                {{ 'icon-decorative-arrow.svg' | inline_asset_content }}
+              </a>
+            </li>
+          {%- endfor -%}
+        </ol>
+
+        {%- if category_cards.size > 1 -%}
+          <div
+            class='category-content-card-cards-scroll medium-hide large-up-hide{% if forloop.index != 1 %} hidden{% endif %}'
+          >
+            <div class='category-content-card-sliders'>
+              {%- for card in category_cards -%}
+                <span class='category-content-card-slider{% if forloop.first %} active{% endif %}'></span>
+              {%- endfor -%}
+            </div>
+
+            <div class='category-content-card-controls'>
+              <button
+                {% if forloop.first %}
+                  disabled
+                {% endif %}
+                aria-label='{{ 'sections.category-content-card.previous' | t }}'
+                class='category-content-card-control-previous'
+              >
+                {{ 'icon-arrow-button.svg' | inline_asset_content }}
+              </button>
+              <button
+                aria-label='{{ 'sections.category-content-card.next' | t }}'
+                class='category-content-card-control-next'
+              >
+                {{ 'icon-arrow-button.svg' | inline_asset_content }}
+              </button>
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.category-content-card.name",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:sections.all.colors.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "color_scheme",
+      "id": "cards_color_scheme",
+      "label": "t:sections.category-content-card.settings.cards_color_scheme.label",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.category-content-card.settings.header.content"
+    },
+    {
+      "type": "text",
+      "id": "heading_title",
+      "default": "t:sections.category-content-card.settings.heading_title.default",
+      "label": "t:sections.category-content-card.settings.heading_title.label"
+    },
+    {
+      "type": "text",
+      "id": "heading_description",
+      "default": "t:sections.category-content-card.settings.heading_description.default",
+      "label": "t:sections.category-content-card.settings.heading_description.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 56
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 24
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "t:sections.category-content-card.blocks.card.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "tab_name",
+          "label": "t:sections.category-content-card.blocks.card.settings.tab_name.label"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.category-content-card.blocks.card.settings.link.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.category-content-card.blocks.card.settings.image.label",
+          "info": "t:sections.category-content-card.blocks.card.settings.image.info"
+        },
+        {
+          "type": "select",
+          "id": "media_fit",
+          "options": [
+            {
+              "value": "cover",
+              "label": "t:sections.category-content-card.blocks.card.settings.media_fit.options__1.label"
+            },
+            {
+              "value": "contain",
+              "label": "t:sections.category-content-card.blocks.card.settings.media_fit.options__2.label"
+            }
+          ],
+          "default": "cover",
+          "label": "t:sections.category-content-card.blocks.card.settings.media_fit.label"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.category-content-card.blocks.card.settings.title.label"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "t:sections.category-content-card.blocks.card.settings.description.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.category-content-card.name",
+      "blocks": [
+        {
+          "type": "card",
+          "settings": {
+            "tab_name": "Tab 1",
+            "title": "Card 1.1",
+            "description": "Description"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "tab_name": "Tab 1",
+            "title": "Card 1.2",
+            "description": "Description"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "tab_name": "Tab 2",
+            "title": "Card 2.1",
+            "description": "Description"
+          }
+        },
+        {
+          "type": "card",
+          "settings": {
+            "tab_name": "Tab 2",
+            "title": "Card 2.2",
+            "description": "Description"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

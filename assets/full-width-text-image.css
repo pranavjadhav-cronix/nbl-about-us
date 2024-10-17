@@ -1,0 +1,92 @@
+.full-width-text-image-section .image-with-text__content > * + * {
+  margin-top: 1.6rem;
+}
+
+.full-width-text-image-section
+  .image-with-text__content
+  .top-content:not(:first-child) {
+  margin-top: 1.6rem;
+}
+.full-width-text-image-section .image-with-text__content .top-content,
+.full-width-text-image-section .image-with-text__content .top-content p {
+  margin: 0 0 0 0;
+  font-family: var(--secondary-font);
+  font-weight: 300;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: rgba(var(--color-foreground), 1);
+  max-width: 17rem;
+
+  @media screen and (min-width: 990px) {
+    max-width: 21.5rem;
+  }
+}
+
+.full-width-text-image-section .image-with-text__content .top-content-main {
+  margin-bottom: 5rem;
+}
+
+.full-width-text-image-section
+  .image-with-text__content
+  .image-with-text__heading {
+  margin-top: auto;
+}
+.full-width-text-image-section .image-with-text__content .image-with-text__text,
+.full-width-text-image-section
+  .image-with-text__content
+  .image-with-text__text
+  > * {
+  font-family: var(--primary-font);
+  font-weight: normal;
+  color: rgba(var(--color-foreground), 1);
+}
+.full-width-text-image-section .image-with-text__content .button {
+  min-width: 217px;
+}
+
+.full-width-text-image-section .image-with-text__content {
+  padding: 2.4rem 1.6rem 3.2rem;
+}
+
+.full-width-text-image-section .image-with-text__text-item {
+  min-width: 260px;
+}
+
+@media screen and (min-width: 750px) {
+  .full-width-text-image-section .image-with-text__content > * + * {
+    margin-top: 2.4rem;
+  }
+  .full-width-text-image-section .image-with-text__content .top-content-main {
+    margin-bottom: 3.2rem;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .full-width-text-image-section
+    .image-with-text__content
+    .top-content:not(:first-child) {
+    margin-top: 3.2rem;
+  }
+  .full-width-text-image-section .image-with-text__content {
+    padding: 3.2rem 2.4rem 4rem;
+  }
+}
+
+@media screen and (min-width: 1921px) {
+  .full-width-text-image-section .image-with-text__grid {
+    padding-right: calc((100% - var(--page-width)) / 2 - 0px);
+    padding-left: 0;
+  }
+  .full-width-text-image-section
+    .image-with-text__grid.image-with-text__grid--reverse {
+    padding-left: calc((100% - var(--page-width)) / 2 - 0px);
+    padding-right: 0;
+  }
+}
+
+@media screen and (max-width: 739px) {
+  .full-width-text-image-section .image-with-text__content .button {
+    margin-top: 2.4rem;
+    width: 100%;
+  }
+}
