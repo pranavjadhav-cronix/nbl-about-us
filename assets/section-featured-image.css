@@ -1,0 +1,105 @@
+.image-container {
+  display: flex;
+  gap: 2rem;
+  flex-direction: column;
+}
+
+.featured-image-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.featured-image-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.featured-image-text h2 {
+  max-width: 65%;
+  position: absolute;
+  bottom: 15%;
+  left: 3%;
+  font-family: "GT Pressura";
+  font-style: normal;
+  font-weight: 500;
+  margin: 0;
+  font-size: 2.48rem;
+  line-height: 2.5833rem;
+  letter-spacing: -0.0992rem;
+}
+
+.featured-image-text p {
+  max-width: 50%;
+  font-family: "Suisse Int'l";
+  font-style: normal;
+  font-weight: 500;
+  margin: 0;
+  margin-top: 1.3rem;
+  /* margin-bottom: 1.2rem; */
+  font-size: 1.4rem;
+  line-height: 1.45rem;
+}
+
+.featured-image-item:nth-child(1) {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.featured-image-item:nth-child(2) {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+/* Tab */
+@media screen and (min-width: 750px) {
+  .image-container {
+    justify-content: space-between;
+    align-items: stretch;    
+    flex-direction: row-reverse;
+  }
+  
+  .featured-image-text h2 {
+    bottom: 6%;
+  }
+  .featured-image-text p {
+    margin-top: 0;
+    margin-bottom: 1.2rem;
+  }
+
+  .featured-image-item.item-left {
+    height: 1100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  
+  .featured-image-item:nth-child(1) {
+    height: 100%;
+    flex-direction: column;
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 1280px) {    
+  .featured-image-text h2 {
+    max-width: 70%;
+
+    font-size: 4.8rem;
+    line-height: 50px;
+    letter-spacing: -1.92px;
+  }
+  
+  .featured-image-text p {
+    font-size: 2rem;
+    line-height: 22px;
+    margin: 0;
+    margin-bottom: 2.6rem
+  }
+  
+  .featured-image-item.item-left {
+    height: 1500px;
+  }
+}

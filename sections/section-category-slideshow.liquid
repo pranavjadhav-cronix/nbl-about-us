@@ -1,0 +1,224 @@
+{{ 'section-category-slideshow.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="category-slideshow-section page-width color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding">
+  <div class="category-content">
+    <div class="category-heading">
+      {% if section.settings.heading-cat %}
+        <h2>{{ section.settings.heading-cat }}</h2>
+      {% endif %}
+      {% if section.settings.subheading-cat %}
+        <p>{{ section.settings.subheading-cat }}</p>
+      {% endif %}
+    </div>
+    <div class="category-tabs">
+      <ul class="tabs-list">
+        <li class="tabs-list-items">
+          {% if section.settings.menu_cat %}
+            {% for link in section.settings.menu_cat.links %}
+              <a href="{{ link.url }}" class="tabs-list-items {% if forloop.first %}active{% endif %}">
+                {{ link.title }}
+              </a>
+            {% endfor %}
+          {% endif %}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="category-slides">
+    {% for block in section.blocks %}
+      <div class="category-slide">
+        <div class="slide-content">
+          <p class="slide-num">01</p>
+          {% if block.settings.title-slide %}
+            <h3>{{ block.settings.title-slide }}</h3>
+          {% endif %}
+          {% if block.settings.subtitle-slide %}
+            <h4>{{ block.settings.subtitle-slide }}</h4>
+          {% endif %}
+          <div class="slide-image">
+            {% if block.settings.image-slide %}
+              {{ block.settings.image-slide | image_url: width: 500 | image_tag }}
+            {% endif %}
+          </div>
+          {% if block.settings.description-slide %}
+            <p>{{ block.settings.description-slide }}</p>
+          {% endif %}
+          {% if block.settings.link-slide %}
+            <a href="{{ block.settings.link-slide }}" class="slide-link">{% render 'icon-right-light.liquid' %}</a>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% javascript %}
+// Active Link
+document.addEventListener("DOMContentLoaded", function() {
+  const links = document.querySelectorAll('.tabs-list a');
+
+  links.forEach(link => {
+    link.addEventListener('click', function(event) {
+      event.preventDefault();
+
+      links.forEach(link => link.classList.remove('active'));
+
+      this.classList.add('active');
+
+      window.location.href = this.getAttribute('href');
+    });
+  });
+});
+
+// Slider
+$('.category-slides').slick({
+  dots: true,
+  infinite: false,
+  speed: 300,
+  autoplay: true,
+  autoplaySpeed: 2000,
+  slidesToShow: 4,
+  slidesToScroll: 4,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 4,
+        infinite: true,
+        dots: true
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 4
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+  ]
+});
+	
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Category Slideshow",
+  "tag": "section",
+  "class": "category-slideshow",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading-cat",
+      "label": "Section Heading",
+      "default": "Gear up for greatness"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading-cat",
+      "label": "Subheading",
+      "default": "Find everything you need to be your best, wherever you are on your journey."
+    },
+    {
+      "type": "link_list",
+      "id": "menu_cat",
+      "label": "Category Menu"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "scheme_1",
+      "label": "Color Scheme"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 52
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slides",
+      "name": "Slides",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title-slide",
+          "label": "Title",
+          "default": "Title"
+        },
+        {
+          "type": "text",
+          "id": "subtitle-slide",
+          "label": "Subtitle",
+          "default": "Line 2"
+        },
+        {
+          "type": "image_picker",
+          "id": "image-slide",
+          "label": "Image"
+        },
+        {
+          "type": "textarea",
+          "id": "description-slide",
+          "label": "Description",
+          "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        },
+        {
+          "type": "url",
+          "id": "link-slide",
+          "label": "Link URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category Slideshow"
+    }
+  ]
+}
+{% endschema %}

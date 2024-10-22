@@ -1,1 +1,55 @@
-{"name":"t:sections.footer.name","type":"footer","sections":{"footer_nobull":{"type":"footer-nobull","blocks":{"navigation_H3RcHk":{"type":"navigation","settings":{"linklist":""}},"navigation_yet6yV":{"type":"navigation","settings":{"linklist":""}},"navigation_x6L6dW":{"type":"navigation","settings":{"linklist":""}},"newsletter_awxPKB":{"type":"newsletter","settings":{"heading_text":"Newsletter","body_text":"Stay ahead of the game with exclusive NOBULL updates, early access to new releases, and special offers.","body_text_agree":"By signing up you agree to our Terms, Privacy Policy, and to receive marketing updates from NOBULL."}}},"block_order":["navigation_H3RcHk","navigation_yet6yV","navigation_x6L6dW","newsletter_awxPKB"],"settings":{"color_scheme":"scheme-3","show_top_line":true,"copyright":"<p>Copyright 2024. All rights reserved. CrossFit, LLC is the registered owner of the CrossFit® and CrossFit Games® marks, which are used under license. NOBULL, LLC 135 William T Morrissey Blvd Boston, MA 02125<\/p>","show_social":true,"enable_country_selector":true,"nav_bottom":""}}},"order":["footer_nobull"]}
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "footer_nobull": {
+      "type": "footer-nobull",
+      "blocks": {
+        "navigation_3rA94Q": {
+          "type": "navigation",
+          "settings": {
+            "linklist": "get-help"
+          }
+        },
+        "navigation_yet6yV": {
+          "type": "navigation",
+          "settings": {
+            "linklist": "discover"
+          }
+        },
+        "navigation_x6L6dW": {
+          "type": "navigation",
+          "settings": {
+            "linklist": "join-us"
+          }
+        },
+        "newsletter_awxPKB": {
+          "type": "newsletter",
+          "settings": {
+            "heading_text": "Newsletter",
+            "body_text": "Stay ahead of the game with exclusive NOBULL updates, early access to new releases, and special offers.",
+            "body_text_agree": "By signing up you agree to our Terms, Privacy Policy, and to receive marketing updates from NOBULL."
+          }
+        }
+      },
+      "block_order": [
+        "navigation_3rA94Q",
+        "navigation_yet6yV",
+        "navigation_x6L6dW",
+        "newsletter_awxPKB"
+      ],
+      "settings": {
+        "color_scheme": "scheme-3",
+        "show_top_line": true,
+        "logo": "shopify:\/\/shop_images\/NB_Black_2x_3497a567-d190-4a73-b94a-724d2e7c7215.svg",
+        "copyright": "<p>Copyright 2024. All rights reserved. CrossFit, LLC is the registered owner of the CrossFit® and CrossFit Games® marks, which are used under license. NOBULL, LLC 135 William T Morrissey Blvd Boston, MA 02125<\/p>",
+        "show_social": true,
+        "enable_country_selector": true,
+        "nav_bottom": "footer"
+      }
+    }
+  },
+  "order": [
+    "footer_nobull"
+  ]
+}

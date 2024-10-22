@@ -1,1 +1,214 @@
-{"sections":{"main":{"type":"main-404","disabled":true,"settings":{}},"section_banner_4EjVcW":{"type":"section-banner","settings":{"banner-title":"All you need to start is a willingness to better yourself physically, mentally, and emotionally","banner-heading":"Day 1 or Day 1000","banner-text":"we are here for your journey to become the best version of yourself","color_scheme":"scheme-2","padding_top":64,"padding_bottom":48}}},"order":["main","section_banner_4EjVcW"]}
+{
+  "sections": {
+    "main": {
+      "type": "main-404",
+      "disabled": true,
+      "settings": {
+      }
+    },
+    "section_banner_4EjVcW": {
+      "type": "section-banner",
+      "settings": {
+        "banner-title": "All you need to start is a willingness to better yourself physically, mentally, and emotionally",
+        "banner-heading": "Day 1 or Day 1000",
+        "banner-text": "we are here for your journey to become the best version of yourself",
+        "color_scheme": "scheme-2",
+        "padding_top": 64,
+        "padding_bottom": 48
+      }
+    },
+    "video_JQgKXW": {
+      "type": "video",
+      "settings": {
+        "heading": "",
+        "heading_size": "h2",
+        "enable_video_looping": true,
+        "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
+        "cover_image": "shopify:\/\/shop_images\/video-cover.jpg",
+        "description": "Swimming",
+        "full_width": true,
+        "color_scheme": "scheme-1",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    },
+    "section_featured_image_tAEfYX": {
+      "type": "section-featured-image",
+      "settings": {
+        "description_1": "[01] Lorem ipsum dolor sit amet Lorem ipsum stage copy length maximum sample.",
+        "heading_1": "Topic title Lorem ipsum dolor sit amet",
+        "image_1": "shopify:\/\/shop_images\/featured_image_1.png",
+        "description_2": "[02] Lorem ipsum dolor sit amet Lorem ipsum stage copy length maximum sample.",
+        "heading_2": "Topic title Lorem ipsum dolor sit amet",
+        "image_2": "shopify:\/\/shop_images\/featured_image_2.png",
+        "color_scheme": "scheme-2",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "section_accordion_ncx88a": {
+      "type": "section-accordion",
+      "blocks": {
+        "accordion_bVpX7V": {
+          "type": "accordion",
+          "settings": {
+            "heading_acc": "Who We Are",
+            "content_acc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+          }
+        },
+        "accordion_Jtk7db": {
+          "type": "accordion",
+          "settings": {
+            "heading_acc": "What We Believe",
+            "content_acc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+          }
+        },
+        "accordion_tTp8NK": {
+          "type": "accordion",
+          "settings": {
+            "heading_acc": "Our Mindset",
+            "content_acc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+          }
+        }
+      },
+      "block_order": [
+        "accordion_bVpX7V",
+        "accordion_Jtk7db",
+        "accordion_tTp8NK"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "section_card_module_YaEMGX": {
+      "type": "section-card-module",
+      "blocks": {
+        "cards_t4E7tg": {
+          "type": "cards",
+          "settings": {
+            "image-card": "shopify:\/\/shop_images\/card_1.png",
+            "header-card": "Header",
+            "description-card": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "button_text-card": "Explore",
+            "button_url-card": ""
+          }
+        },
+        "cards_TaXQ3W": {
+          "type": "cards",
+          "settings": {
+            "image-card": "shopify:\/\/shop_images\/card_2.png",
+            "header-card": "Header",
+            "description-card": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "button_text-card": "Explore",
+            "button_url-card": ""
+          }
+        },
+        "cards_336Rig": {
+          "type": "cards",
+          "settings": {
+            "image-card": "shopify:\/\/shop_images\/card_3.png",
+            "header-card": "Header",
+            "description-card": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "button_text-card": "Explore",
+            "button_url-card": ""
+          }
+        }
+      },
+      "block_order": [
+        "cards_t4E7tg",
+        "cards_TaXQ3W",
+        "cards_336Rig"
+      ],
+      "settings": {
+        "color_scheme": "scheme-2",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "section_category_slideshow_HyPRiJ": {
+      "type": "section-category-slideshow",
+      "blocks": {
+        "slides_7N64eG": {
+          "type": "slides",
+          "settings": {
+            "title-slide": "Title",
+            "subtitle-slide": "Line 2",
+            "image-slide": "shopify:\/\/shop_images\/slide_1.png",
+            "description-slide": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "link-slide": ""
+          }
+        },
+        "slides_cNhN4J": {
+          "type": "slides",
+          "settings": {
+            "title-slide": "Title",
+            "subtitle-slide": "Line 2",
+            "image-slide": "shopify:\/\/shop_images\/slide_2.png",
+            "description-slide": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "link-slide": ""
+          }
+        },
+        "slides_mDw6CU": {
+          "type": "slides",
+          "settings": {
+            "title-slide": "Title",
+            "subtitle-slide": "Line 2",
+            "image-slide": "shopify:\/\/shop_images\/slide_3.png",
+            "description-slide": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "link-slide": ""
+          }
+        },
+        "slides_jXJk4y": {
+          "type": "slides",
+          "settings": {
+            "title-slide": "Title",
+            "subtitle-slide": "Line 2",
+            "image-slide": "shopify:\/\/shop_images\/slide_4.png",
+            "description-slide": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+            "link-slide": ""
+          }
+        }
+      },
+      "block_order": [
+        "slides_7N64eG",
+        "slides_cNhN4J",
+        "slides_mDw6CU",
+        "slides_jXJk4y"
+      ],
+      "settings": {
+        "heading-cat": "Gear up for greatness",
+        "subheading-cat": "Find everything you need to be your best, wherever you are on your journey.",
+        "menu_cat": "category-tabs",
+        "color_scheme": "scheme-2",
+        "padding_top": 56,
+        "padding_bottom": 52
+      }
+    },
+    "section_join_team_m9NhVp": {
+      "type": "section-join-team",
+      "settings": {
+        "heading": "Join Team NOBULL",
+        "subheading": "Get exclusive discounts, first-looks at new products, family + friend benefits, and access to experiences only NOBULL can provide.",
+        "button_text": "Join the Team",
+        "button_link": "",
+        "promo_text": "<p>IN THE PURSUIT TO BE BETTER.<\/p><p><br\/>WE TRAIN FOR LIFE.<\/p><p><br\/>IT'S NOT ABOUT BEING LOYAL TO US. IT'S ABOUT BEING LOYAL TO YOURSELF.<\/p>",
+        "image": "shopify:\/\/shop_images\/team.png",
+        "color_scheme": "scheme-2",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    }
+  },
+  "order": [
+    "main",
+    "section_banner_4EjVcW",
+    "video_JQgKXW",
+    "section_featured_image_tAEfYX",
+    "section_accordion_ncx88a",
+    "section_card_module_YaEMGX",
+    "section_category_slideshow_HyPRiJ",
+    "section_join_team_m9NhVp"
+  ]
+}

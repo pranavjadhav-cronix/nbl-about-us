@@ -1,0 +1,65 @@
+.accordion-item {
+  border-bottom: 1px solid #FDFCF9;
+}
+
+.accordion-header h3 {
+  font-family: "Suisse Int'l";
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 2.2rem; 
+  
+  cursor: pointer;
+  margin: 0;
+  padding: 2.4rem;
+  padding-left: 0;
+}
+
+p.accordion-content {
+  font-family: "GT Pressura";
+  font-style: normal;
+  font-weight: 500;
+  padding: 4rem 0 4rem 0;
+  margin: 0;
+  font-size: 2.4rem;
+  line-height: 2.8rem;
+  letter-spacing: -0.096rem;
+}
+
+.accordion-header h3::after {
+  content: "+"; 
+  float: right;
+  font-size: 2rem;
+}
+
+details[open] .accordion-header h3::after {
+  content: "-"; 
+}
+
+/* Tab */
+@media screen and (min-width: 750px) {
+  .accordion-header h3 {
+    font-size: 2rem;
+  }
+  
+  p.accordion-content {
+    font-size: 3.2rem;
+    line-height: 3.4rem; 
+    letter-spacing: -0.128rem;
+    padding: 0 0 7rem 20.9rem;
+  }
+  
+  .accordion-header h3::after {
+    font-size: 2.2rem;
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 1280px) {    
+  .accordion-header h3 {
+    font-size: 2rem;
+  }
+  p.accordion-content {
+    padding: 0 0 7rem 40.9rem;
+  }
+}

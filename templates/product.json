@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
     "main": {
@@ -21,11 +12,13 @@
         },
         "title": {
           "type": "title",
-          "settings": {}
+          "settings": {
+          }
         },
         "price": {
           "type": "price",
-          "settings": {}
+          "settings": {
+          }
         },
         "variant_picker": {
           "type": "variant_picker",
@@ -36,7 +29,8 @@
         },
         "quantity_selector": {
           "type": "quantity_selector",
-          "settings": {}
+          "settings": {
+          }
         },
         "buy_buttons": {
           "type": "buy_buttons",
@@ -56,7 +50,7 @@
           "settings": {
             "heading": "Specifications",
             "content_1_heading": "Specifications",
-            "content_1_content": "<p>This are specifications content</p>",
+            "content_1_content": "<p>This are specifications content<\/p>",
             "content_2_heading": "",
             "content_2_content": ""
           }
@@ -66,9 +60,9 @@
           "settings": {
             "heading": "Shippings & Returns",
             "content_1_heading": "Shipping",
-            "content_1_content": "<p>Free Standard shipping on all US orders $99 and over. Standard orders typically ship within 1-3 business days, and Expedited orders placed by 1PM ET ship the same day. Shipping rates are calculated based on items ordered, shipment destination, and value of your purchase, and does not include customs, duties & service fees (where applicable). See our full Shipping & Handling and Customs & Duties details. </p>",
+            "content_1_content": "<p>Free Standard shipping on all US orders $99 and over. Standard orders typically ship within 1-3 business days, and Expedited orders placed by 1PM ET ship the same day. Shipping rates are calculated based on items ordered, shipment destination, and value of your purchase, and does not include customs, duties & service fees (where applicable). See our full Shipping & Handling and Customs & Duties details. <\/p>",
             "content_2_heading": "Returns",
-            "content_2_content": "<p>For products purchased on nobullproject.com and delivered within the United States; we offer free returns and exchanges within 30 days of delivery using our provided pre-paid label. At this time, exchanges for products delivered outside of the US are unavailable and international customers are responsible for returning them at their own cost. See our full Returns & Exchange Policy.</p>"
+            "content_2_content": "<p>For products purchased on nobullproject.com and delivered within the United States; we offer free returns and exchanges within 30 days of delivery using our provided pre-paid label. At this time, exchanges for products delivered outside of the US are unavailable and international customers are responsible for returning them at their own cost. See our full Returns & Exchange Policy.<\/p>"
           }
         },
         "share": {
@@ -114,19 +108,19 @@
         "only_text_GfDtJE": {
           "type": "only_text",
           "settings": {
-            "text": "<p>Removable molded <br/>anatomical insole</p>"
+            "text": "<p>Removable molded <br\/>anatomical insole<\/p>"
           }
         },
         "only_text_XwEpzc": {
           "type": "only_text",
           "settings": {
-            "text": "<p>Reflective laces and <br/>branding for visibility</p>"
+            "text": "<p>Reflective laces and <br\/>branding for visibility<\/p>"
           }
         },
         "only_text_hBC4Ck": {
           "type": "only_text",
           "settings": {
-            "text": "<p>Medial post for motion <br/>control</p>"
+            "text": "<p>Medial post for motion <br\/>control<\/p>"
           }
         },
         "progress_bar_i7DtCz": {
@@ -136,7 +130,7 @@
             "progress_number": "0",
             "first_heading": "Hard",
             "end_heading": "Bouncy",
-            "tooltip_image": "shopify://shop_images/RSRWHTGUM-WHITE-GUM-RIPSTOP-RUNNER-Web-Detail1a.png",
+            "tooltip_image": "shopify:\/\/shop_images\/RSRWHTGUM-WHITE-GUM-RIPSTOP-RUNNER-Web-Detail1a.png",
             "title": "Durable Comfort",
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consequat porta ultrices dolor sit amet consectetur elit. "
           }
@@ -148,7 +142,7 @@
             "progress_number": "0",
             "first_heading": "Stable",
             "end_heading": "Flexible",
-            "tooltip_image": "shopify://shop_images/RSRWHTGUM-WHITE-GUM-RIPSTOP-RUNNER-Web-Detail1a.png",
+            "tooltip_image": "shopify:\/\/shop_images\/RSRWHTGUM-WHITE-GUM-RIPSTOP-RUNNER-Web-Detail1a.png",
             "title": "Durable Comfort",
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consequat porta ultrices dolor sit amet consectetur elit. "
           }
@@ -160,7 +154,7 @@
             "progress_number": "2",
             "first_heading": "Grip",
             "end_heading": "Movement",
-            "tooltip_image": "shopify://shop_images/RSRWHTGUM-WHITE-GUM-RIPSTOP-RUNNER-Web-Detail1a.png",
+            "tooltip_image": "shopify:\/\/shop_images\/RSRWHTGUM-WHITE-GUM-RIPSTOP-RUNNER-Web-Detail1a.png",
             "title": "Durable Comfort",
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consequat porta ultrices dolor sit amet consectetur elit. "
           }
@@ -172,7 +166,7 @@
             "progress_number": "4",
             "first_heading": "Sturdy",
             "end_heading": "Airflow",
-            "tooltip_image": "shopify://shop_images/RSRWHTGUM-WHITE-GUM-RIPSTOP-RUNNER-Web-Detail1a.png",
+            "tooltip_image": "shopify:\/\/shop_images\/RSRWHTGUM-WHITE-GUM-RIPSTOP-RUNNER-Web-Detail1a.png",
             "title": "Durable Comfort",
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consequat porta ultrices dolor sit amet consectetur elit. "
           }
@@ -184,7 +178,7 @@
             "progress_number": "4",
             "first_heading": "Light",
             "end_heading": "Heavy",
-            "tooltip_image": "shopify://shop_images/RSRWHTGUM-WHITE-GUM-RIPSTOP-RUNNER-Web-Detail1a.png",
+            "tooltip_image": "shopify:\/\/shop_images\/RSRWHTGUM-WHITE-GUM-RIPSTOP-RUNNER-Web-Detail1a.png",
             "title": "Durable Comfort",
             "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consequat porta ultrices dolor sit amet consectetur elit. "
           }
@@ -230,5 +224,9 @@
       }
     }
   },
-  "order": ["main", "characteristics_module_xq3GQb", "related-products"]
+  "order": [
+    "main",
+    "characteristics_module_xq3GQb",
+    "related-products"
+  ]
 }

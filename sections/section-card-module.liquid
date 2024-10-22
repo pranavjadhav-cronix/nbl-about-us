@@ -1,0 +1,140 @@
+{{ 'section-card-module.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="cards-section page-width color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding">
+  <div class="cards-container">
+    {% for block in section.blocks %}
+      <div class="card-item-mb">
+        {% if block.settings.header-card %}
+          <h2 class="card-content-heading">{{ block.settings.header-card }}</h2>
+        {% endif %}
+        {% if block.settings.description-card %}
+          <p class="card-content-desp">{{ block.settings.description-card }}</p>
+        {% endif %}
+        <div class="card-image">
+        {% if block.settings.image-card %}
+          {{ block.settings.image-card | image_url: width: 500 | image_tag }}
+        {% endif %}
+        {% if block.settings.button_text-card %}
+          <a href="{{ block.settings.button_url-card }}" class="card-button">{{ block.settings.button_text-card }}</a>
+        {% endif %}
+      </div>
+  </div>
+
+  <div class="card-item">
+      <div class="card-image">
+        {% if block.settings.image-card %}
+          {{ block.settings.image-card | image_url: width: 500 | image_tag }}
+        {% endif %}
+      </div>
+        {% if block.settings.header-card %}
+          <h2 class="card-content-heading">{{ block.settings.header-card }}</h2>
+        {% endif %}
+        {% if block.settings.description-card %}
+          <p class="card-content-desp">{{ block.settings.description-card }}</p>
+        {% endif %}
+        {% if block.settings.button_text-card %}
+          <a href="{{ block.settings.button_url-card }}" class="card-button">{{ block.settings.button_text-card }}</a>
+        {% endif %}
+    </div>
+      {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Card Module",
+  "tag": "section",
+  "class": "card-module",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "scheme_1",
+      "label": "Color Scheme"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 52
+    }
+  ],
+  "blocks": [
+    {
+        "type": "cards",
+        "name": "Cards",
+        "limit": 10,
+        "settings": [
+        {
+          "type": "image_picker",
+          "id": "image-card",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "header-card",
+          "label": "Header",
+          "default": "Header"
+        },
+        {
+          "type": "textarea",
+          "id": "description-card",
+          "label": "Description",
+          "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        },
+        {
+          "type": "text",
+          "id": "button_text-card",
+          "label": "Button Text",
+          "default": "Explore"
+        },
+        {
+          "type": "url",
+          "id": "button_url-card",
+          "label": "Button URL"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Card Module"
+    }
+  ]
+}
+{% endschema %}

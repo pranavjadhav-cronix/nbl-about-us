@@ -1,0 +1,97 @@
+{{ 'section-accordion.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="accordion-section page-width color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding">
+  {%- for block in section.blocks -%}
+    <details class="accordion-item">
+      <summary class="accordion-header">
+        {% if block.settings.heading_acc %}
+          <h3>{{ block.settings.heading_acc }}</h3>
+        {% endif %}
+      </summary>
+      {% if block.settings.content_acc %}
+        <p class="accordion-content">{{ block.settings.content_acc }}</p>
+      {% endif %}
+    </details>
+  {%- endfor -%}
+</div>
+
+{% schema %}
+{
+  "name": "Accordion Section",
+  "tag": "section",
+  "class": "accordion-section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "scheme_1",
+      "label": "Color Scheme"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.all.padding.section_padding_heading"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.all.padding.padding_bottom",
+      "default": 52
+    }
+  ],
+    "blocks": [
+      {
+        "type": "accordion",
+        "name": "Accordion",
+        "limit": 5,
+        "settings": [
+          {
+            "type": "text",
+            "id": "heading_acc",
+            "label": "Heading"
+          },
+          {
+            "type": "inline_richtext",
+            "id": "content_acc",
+            "label": "Content"
+          }
+        ]
+      }
+    ],
+  "presets": [
+    {
+      "name": "Accordion Section"
+    }
+  ]
+}
+{% endschema %}

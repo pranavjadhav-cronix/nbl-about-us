@@ -1,3 +1,87 @@
 .banner-row {
   display: flex;
+  flex-direction: column;
+}
+
+.banner-title {
+  font-family: "GT Pressura";
+  font-style: normal;
+  font-weight: 500;
+  max-width: 90%;
+  margin: 0;
+  font-size: 4rem;
+  line-height: 4.2rem;
+  letter-spacing: -0.16rem;
+  margin-bottom: 5rem;
+}
+
+.banner-heading {
+  display: none;
+}
+
+.banner-text {
+  font-family: "GT Pressura Mono";
+  margin: 0;
+  max-width: 45%;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 1.8rem;
+  letter-spacing: 0.056rem;
+  text-transform: uppercase;
+}
+
+/* Tab */
+@media screen and (min-width: 750px) {
+  .banner-row {
+    flex-direction: row;
+}
+  
+  .banner-title {
+    font-size: 4.8rem;
+    line-height: 5rem;
+    letter-spacing: -0.192rem;
+    max-width: 70%;
+    margin: 0;
+  }
+  
+  .banner-heading {
+    display: none;
+  }
+  
+  .banner-text {
+    font-size: 1.4rem;
+    line-height: 1.8rem;
+    letter-spacing: 0.056rem;
+    max-width: 70%;
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 1280px) {  
+  .banner-title {
+    font-size: 8.2rem;
+    line-height: 84px;
+    letter-spacing: -3.28px;
+  }
+  
+  .banner-heading {
+    display: block;
+    font-family: "GT Pressura Mono";
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 20px; 
+    letter-spacing: 0.64px;
+    text-transform: uppercase;
+    margin: 0;
+    margin-bottom: 2.4rem;
+    max-width: 60%;
+  }
+  
+  .banner-text {
+    font-size: 1.6rem;
+    line-height: 20px;
+    letter-spacing: 0.64px;
+  }
 }

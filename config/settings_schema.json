@@ -4,8 +4,8 @@
     "theme_name": "Nobull Custom",
     "theme_version": "1.0.0",
     "theme_author": "AKQA",
-    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
-    "theme_support_url": "https://www.akqa.com/"
+    "theme_documentation_url": "https:\/\/help.shopify.com\/manual\/online-store\/themes",
+    "theme_support_url": "https:\/\/www.akqa.com\/"
   },
   {
     "name": "t:settings_schema.logo.name",
@@ -101,7 +101,7 @@
         "type": "text",
         "id": "elevar_url_path",
         "label": "t:settings_schema.technical.settings.elevar_url_path.label",
-        "info": "{top_level_domain}/shops/{id}/{version}"
+        "info": "{top_level_domain}\/shops\/{id}\/{version}"
       }
     ]
   },

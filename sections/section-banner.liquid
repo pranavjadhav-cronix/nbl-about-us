@@ -17,11 +17,17 @@
 <div class="text-banner page-width color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding">
   <div class="banner-row">
     <div class="banner-col-1">
-        <h2>{{ section.settings.banner-title }}</h2>
+      {% if section.settings.banner-title %}
+        <h2 class="banner-title" maxlength="38">{{ section.settings.banner-title }}</h2>
+      {% endif %}
     </div>
     <div class="banner-col-2">
-        <p>{{ section.settings.banner-heading }}</p>
-        <p>{{ section.settings.banner-text }}</p>      
+      {% if section.settings.banner-heading %}
+        <p class="banner-heading">{{ section.settings.banner-heading }}</p>
+      {% endif %}
+      {% if section.settings.banner-text %}
+        <p class="banner-text">{{ section.settings.banner-text }}</p>  
+      {% endif %}
     </div>
   </div>
 </div>
@@ -31,6 +37,9 @@
   "name": "Text Banner",
   "tag": "section",
   "class": "text-banner-custom",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "settings": [
     {
       "type": "inline_richtext",
