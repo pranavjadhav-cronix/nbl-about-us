@@ -44,30 +44,41 @@
   margin-bottom: 1.6rem;
   font-size: 1.4rem;
   line-height: 1.6rem;
+  color: #FDFCF9;
+}
+
+.card-image {
+    position: relative;
 }
 
 .card-item-mb .card-button {
+    position: absolute;
+    bottom: 5%;
+    left: 9%;
+}
+
+.card-item-mb a.card-button {
   font-family: "Suisse Int'l";
   font-size: 1.6rem;
   font-style: normal;
   font-weight: 500;
   line-height: 1.6rem;
-  width: 100%;
+  width: 80%;
   text-align: center;
   display: inline-block;
   padding: 1.6rem 8rem;
-  background-color: #fff;
-  color: #000;
+  background-color: #FDFCF9;
+  color: #050505;
   text-decoration: none;
   margin-top: 5px;
-  border: 1px solid #000;
+  border: 1px solid #050505;
   transition: all 0.3s ease-in-out;
 }
 
-.card-button:hover {
-  background-color: #000;
-  color: #fff;
-  border: 1px solid #fff;
+.card-item-mb a.card-button:hover {
+  background-color: #050505;
+  color: #FDFCF9;
+  border: 1px solid #FDFCF9;
 }
 
 /* Tab */
@@ -100,29 +111,30 @@
   .card-content-desp {
     margin-bottom: 1.6rem;
   }
-  
-  .card-item .card-button {
-    font-family: "Suisse Int'l";
-    font-size: 1.6rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 1.6rem;
-    width: 100%;
-    text-align: center;
-    display: inline-block;
-    padding: 1.6rem 8rem;
-    background-color: #fff;
-    color: #000;
-    text-decoration: none;
-    border: 1px solid #000;
-    transition: all 0.3s ease-in-out;
+
+  .card-item a.card-button {
+  font-family: "Suisse Int'l";
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.6rem;
+  width: 100%;
+  text-align: center;
+  display: inline-block;
+  padding: 1.6rem 8rem;
+  background-color: #FDFCF9;
+  color: #050505;
+  text-decoration: none;
+  margin-top: 5px;
+  border: 1px solid #050505;
+  transition: all 0.3s ease-in-out;
   }
 
-  .card-button:hover {
-  background-color: #000;
-  color: #fff;
-  border: 1px solid #fff;
-}
+  .card-item a.card-button:hover {
+    background-color: #050505;
+    color: #FDFCF9;
+    border: 1px solid #FDFCF9;
+  }
 }
 
 /* Desktop */
@@ -145,7 +157,7 @@
     margin-bottom: 2.4rem;    
   }
   
-  .card-item .card-button {
+  .card-item a.card-button {
     width: unset;
   }
 }

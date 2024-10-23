@@ -57,9 +57,7 @@
           {% if block.settings.description-slide %}
             <p>{{ block.settings.description-slide }}</p>
           {% endif %}
-          {% if block.settings.link-slide %}
             <a href="{{ block.settings.link-slide }}" class="slide-link">{% render 'icon-right-light.liquid' %}</a>
-          {% endif %}
         </div>
       </div>
     {% endfor %}
@@ -104,10 +102,17 @@ $('.category-slides').slick({
       }
     },
     {
+      breakpoint: 800,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3
+      }
+    },
+    {
       breakpoint: 600,
       settings: {
-        slidesToShow: 4,
-        slidesToScroll: 4
+        slidesToShow: 2,
+        slidesToScroll: 2
       }
     },
     {

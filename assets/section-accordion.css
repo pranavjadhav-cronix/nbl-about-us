@@ -24,6 +24,7 @@ p.accordion-content {
   font-size: 2.4rem;
   line-height: 2.8rem;
   letter-spacing: -0.096rem;
+  color: #FDFCF9;
 }
 
 .accordion-header h3::after {

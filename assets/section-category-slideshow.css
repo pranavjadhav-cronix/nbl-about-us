@@ -63,6 +63,7 @@ li.tabs-list-items a.active {
   line-height: 1.6rem;
   margin: 0;
   max-width: 60%;
+  color: #FDFCF9;
 }
 
 .category-slides {

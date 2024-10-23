@@ -1,6 +1,14 @@
 {
   "sections": {
-    "section_banner_4EjVcW": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "padding_top": 28,
+        "padding_bottom": 28
+      }
+    },
+    "section_banner_wexmdL": {
       "type": "section-banner",
       "settings": {
         "banner-title": "All you need to start is a willingness to better yourself physically, mentally, and emotionally",
@@ -11,60 +19,64 @@
         "padding_bottom": 48
       }
     },
-    "video_JQgKXW": {
+    "video_TARA4z": {
       "type": "video",
       "settings": {
         "heading": "",
         "heading_size": "h2",
-        "enable_video_looping": true,
+        "enable_video_looping": false,
         "video_url": "https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc",
         "cover_image": "shopify:\/\/shop_images\/video-cover.jpg",
         "description": "Swimming",
         "full_width": true,
-        "color_scheme": "scheme-1",
+        "color_scheme": "",
         "padding_top": 0,
         "padding_bottom": 0
       }
     },
-    "section_video_PzCqRP": {
-      "type": "section-video",
+    "section_featured_image_BcNgLE": {
+      "type": "section-featured-image",
       "settings": {
-        "video-tag1": "shopify:\/\/files\/videos\/3195394-uhd_3840_2160_25fps.mp4",
-        "featured_image-video": "shopify:\/\/shop_images\/video-cover.jpg",
-        "color_scheme": "",
-        "padding_top": 40,
-        "padding_bottom": 52
+        "description_1": "[01] Lorem ipsum dolor sit amet Lorem ipsum stage copy length maximum sample.",
+        "heading_1": "Topic title Lorem ipsum dolor sit amet",
+        "image_1": "shopify:\/\/shop_images\/featured_image_1.png",
+        "description_2": "[02] Lorem ipsum dolor sit amet Lorem ipsum stage copy length maximum sample.",
+        "heading_2": "Topic title Lorem ipsum dolor sit amet",
+        "image_2": "shopify:\/\/shop_images\/featured_image_2.png",
+        "color_scheme": "scheme-2",
+        "padding_top": 52,
+        "padding_bottom": 24
       }
     },
-    "section_accordion_ncx88a": {
+    "section_accordion_GVkV9Y": {
       "type": "section-accordion",
       "blocks": {
-        "accordion_bVpX7V": {
+        "accordion_rXyw49": {
           "type": "accordion",
           "settings": {
             "heading_acc": "Who We Are",
             "content_acc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor Lorem ipsum dolor sit amet, consectetur adipiscing elit"
           }
         },
-        "accordion_Jtk7db": {
+        "accordion_NViECj": {
           "type": "accordion",
           "settings": {
-            "heading_acc": "What We Believe",
+            "heading_acc": "Who We Are",
             "content_acc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor Lorem ipsum dolor sit amet, consectetur adipiscing elit"
           }
         },
-        "accordion_tTp8NK": {
+        "accordion_CgDcTd": {
           "type": "accordion",
           "settings": {
-            "heading_acc": "Our Mindset",
+            "heading_acc": "Who We Are",
             "content_acc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor Lorem ipsum dolor sit amet, consectetur adipiscing elit"
           }
         }
       },
       "block_order": [
-        "accordion_bVpX7V",
-        "accordion_Jtk7db",
-        "accordion_tTp8NK"
+        "accordion_rXyw49",
+        "accordion_NViECj",
+        "accordion_CgDcTd"
       ],
       "settings": {
         "color_scheme": "scheme-2",
@@ -72,10 +84,10 @@
         "padding_bottom": 20
       }
     },
-    "section_card_module_YaEMGX": {
+    "section_card_module_pWcfLC": {
       "type": "section-card-module",
       "blocks": {
-        "cards_t4E7tg": {
+        "cards_T9Ljaf": {
           "type": "cards",
           "settings": {
             "image-card": "shopify:\/\/shop_images\/card_1.png",
@@ -85,17 +97,17 @@
             "button_url-card": ""
           }
         },
-        "cards_TaXQ3W": {
+        "cards_wwh66U": {
           "type": "cards",
           "settings": {
-            "image-card": "shopify:\/\/shop_images\/card_2.png",
+            "image-card": "shopify:\/\/shop_images\/card_2_20ab9f52-69a7-4523-a68a-56f03eec2b7b.png",
             "header-card": "Header",
             "description-card": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
             "button_text-card": "Explore",
             "button_url-card": ""
           }
         },
-        "cards_336Rig": {
+        "cards_w6YDtM": {
           "type": "cards",
           "settings": {
             "image-card": "shopify:\/\/shop_images\/card_3.png",
@@ -107,9 +119,9 @@
         }
       },
       "block_order": [
-        "cards_t4E7tg",
-        "cards_TaXQ3W",
-        "cards_336Rig"
+        "cards_T9Ljaf",
+        "cards_wwh66U",
+        "cards_w6YDtM"
       ],
       "settings": {
         "color_scheme": "scheme-2",
@@ -117,10 +129,10 @@
         "padding_bottom": 56
       }
     },
-    "section_category_slideshow_HyPRiJ": {
+    "section_category_slideshow_mUJkLE": {
       "type": "section-category-slideshow",
       "blocks": {
-        "slides_7N64eG": {
+        "slides_cQyt87": {
           "type": "slides",
           "settings": {
             "title-slide": "Title",
@@ -130,7 +142,7 @@
             "link-slide": ""
           }
         },
-        "slides_cNhN4J": {
+        "slides_TgHVwb": {
           "type": "slides",
           "settings": {
             "title-slide": "Title",
@@ -140,7 +152,7 @@
             "link-slide": ""
           }
         },
-        "slides_mDw6CU": {
+        "slides_6kKGX4": {
           "type": "slides",
           "settings": {
             "title-slide": "Title",
@@ -150,7 +162,7 @@
             "link-slide": ""
           }
         },
-        "slides_jXJk4y": {
+        "slides_TQ4zTm": {
           "type": "slides",
           "settings": {
             "title-slide": "Title",
@@ -162,10 +174,10 @@
         }
       },
       "block_order": [
-        "slides_7N64eG",
-        "slides_cNhN4J",
-        "slides_mDw6CU",
-        "slides_jXJk4y"
+        "slides_cQyt87",
+        "slides_TgHVwb",
+        "slides_6kKGX4",
+        "slides_TQ4zTm"
       ],
       "settings": {
         "heading-cat": "Gear up for greatness",
@@ -176,7 +188,7 @@
         "padding_bottom": 64
       }
     },
-    "section_join_team_m9NhVp": {
+    "section_join_team_ymPY4q": {
       "type": "section-join-team",
       "settings": {
         "heading": "Join Team NOBULL",
@@ -186,25 +198,19 @@
         "promo_text": "<p>IN THE PURSUIT TO BE BETTER.<\/p><p><br\/>WE TRAIN FOR LIFE.<\/p><p><br\/>IT'S NOT ABOUT BEING LOYAL TO US. IT'S ABOUT BEING LOYAL TO YOURSELF.<\/p>",
         "image": "shopify:\/\/shop_images\/team.png",
         "color_scheme": "scheme-2",
-        "padding_top": 4,
+        "padding_top": 0,
         "padding_bottom": 0
-      }
-    },
-    "main": {
-      "type": "main-404",
-      "disabled": true,
-      "settings": {
       }
     }
   },
   "order": [
-    "section_banner_4EjVcW",
-    "video_JQgKXW",
-    "section_video_PzCqRP",
-    "section_accordion_ncx88a",
-    "section_card_module_YaEMGX",
-    "section_category_slideshow_HyPRiJ",
-    "section_join_team_m9NhVp",
-    "main"
+    "main",
+    "section_banner_wexmdL",
+    "video_TARA4z",
+    "section_featured_image_BcNgLE",
+    "section_accordion_GVkV9Y",
+    "section_card_module_pWcfLC",
+    "section_category_slideshow_mUJkLE",
+    "section_join_team_ymPY4q"
   ]
 }
